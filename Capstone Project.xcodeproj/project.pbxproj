@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14F2CD8D28779C000046372F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8C28779C000046372F /* AppDelegate.m */; };
+		14F2CD9028779C000046372F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8F28779C000046372F /* SceneDelegate.m */; };
+		14F2CD9328779C000046372F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD9228779C000046372F /* ViewController.m */; };
+		14F2CD9628779C000046372F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9428779C000046372F /* Main.storyboard */; };
+		14F2CD9828779C010046372F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9728779C010046372F /* Assets.xcassets */; };
+		14F2CD9B28779C010046372F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9928779C010046372F /* LaunchScreen.storyboard */; };
+		14F2CD9E28779C010046372F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD9D28779C010046372F /* main.m */; };
+		14F2CDA828779C010046372F /* Capstone_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CDA728779C010046372F /* Capstone_ProjectTests.m */; };
+		14F2CDB228779C010046372F /* Capstone_ProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CDB128779C010046372F /* Capstone_ProjectUITests.m */; };
+		14F2CDB428779C010046372F /* Capstone_ProjectUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CDB328779C010046372F /* Capstone_ProjectUITestsLaunchTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14F2CDA428779C010046372F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14F2CD8028779C000046372F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14F2CD8728779C000046372F;
+			remoteInfo = "Capstone Project";
+		};
+		14F2CDAE28779C010046372F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14F2CD8028779C000046372F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14F2CD8728779C000046372F;
+			remoteInfo = "Capstone Project";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14F2CD8828779C000046372F /* Capstone Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14F2CD8B28779C000046372F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		14F2CD8C28779C000046372F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		14F2CD8E28779C000046372F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		14F2CD8F28779C000046372F /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		14F2CD9128779C000046372F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		14F2CD9228779C000046372F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		14F2CD9528779C000046372F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		14F2CD9728779C010046372F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		14F2CD9A28779C010046372F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		14F2CD9C28779C010046372F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14F2CD9D28779C010046372F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		14F2CDA328779C010046372F /* Capstone ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Capstone ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14F2CDA728779C010046372F /* Capstone_ProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Capstone_ProjectTests.m; sourceTree = "<group>"; };
+		14F2CDAD28779C010046372F /* Capstone ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Capstone ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14F2CDB128779C010046372F /* Capstone_ProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Capstone_ProjectUITests.m; sourceTree = "<group>"; };
+		14F2CDB328779C010046372F /* Capstone_ProjectUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Capstone_ProjectUITestsLaunchTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14F2CD8528779C000046372F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14F2CDA028779C010046372F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14F2CDAA28779C010046372F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14F2CD7F28779C000046372F = {
+			isa = PBXGroup;
+			children = (
+				14F2CD8A28779C000046372F /* Capstone Project */,
+				14F2CDA628779C010046372F /* Capstone ProjectTests */,
+				14F2CDB028779C010046372F /* Capstone ProjectUITests */,
+				14F2CD8928779C000046372F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14F2CD8928779C000046372F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14F2CD8828779C000046372F /* Capstone Project.app */,
+				14F2CDA328779C010046372F /* Capstone ProjectTests.xctest */,
+				14F2CDAD28779C010046372F /* Capstone ProjectUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14F2CD8A28779C000046372F /* Capstone Project */ = {
+			isa = PBXGroup;
+			children = (
+				14F2CD8B28779C000046372F /* AppDelegate.h */,
+				14F2CD8C28779C000046372F /* AppDelegate.m */,
+				14F2CD8E28779C000046372F /* SceneDelegate.h */,
+				14F2CD8F28779C000046372F /* SceneDelegate.m */,
+				14F2CD9128779C000046372F /* ViewController.h */,
+				14F2CD9228779C000046372F /* ViewController.m */,
+				14F2CD9428779C000046372F /* Main.storyboard */,
+				14F2CD9728779C010046372F /* Assets.xcassets */,
+				14F2CD9928779C010046372F /* LaunchScreen.storyboard */,
+				14F2CD9C28779C010046372F /* Info.plist */,
+				14F2CD9D28779C010046372F /* main.m */,
+			);
+			path = "Capstone Project";
+			sourceTree = "<group>";
+		};
+		14F2CDA628779C010046372F /* Capstone ProjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				14F2CDA728779C010046372F /* Capstone_ProjectTests.m */,
+			);
+			path = "Capstone ProjectTests";
+			sourceTree = "<group>";
+		};
+		14F2CDB028779C010046372F /* Capstone ProjectUITests */ = {
+			isa = PBXGroup;
+			children = (
+				14F2CDB128779C010046372F /* Capstone_ProjectUITests.m */,
+				14F2CDB328779C010046372F /* Capstone_ProjectUITestsLaunchTests.m */,
+			);
+			path = "Capstone ProjectUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		14F2CD8728779C000046372F /* Capstone Project */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14F2CDB728779C010046372F /* Build configuration list for PBXNativeTarget "Capstone Project" */;
+			buildPhases = (
+				14F2CD8428779C000046372F /* Sources */,
+				14F2CD8528779C000046372F /* Frameworks */,
+				14F2CD8628779C000046372F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Capstone Project";
+			productName = "Capstone Project";
+			productReference = 14F2CD8828779C000046372F /* Capstone Project.app */;
+			productType = "com.apple.product-type.application";
+		};
+		14F2CDA228779C010046372F /* Capstone ProjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14F2CDBA28779C010046372F /* Build configuration list for PBXNativeTarget "Capstone ProjectTests" */;
+			buildPhases = (
+				14F2CD9F28779C010046372F /* Sources */,
+				14F2CDA028779C010046372F /* Frameworks */,
+				14F2CDA128779C010046372F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14F2CDA528779C010046372F /* PBXTargetDependency */,
+			);
+			name = "Capstone ProjectTests";
+			productName = "Capstone ProjectTests";
+			productReference = 14F2CDA328779C010046372F /* Capstone ProjectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		14F2CDAC28779C010046372F /* Capstone ProjectUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14F2CDBD28779C010046372F /* Build configuration list for PBXNativeTarget "Capstone ProjectUITests" */;
+			buildPhases = (
+				14F2CDA928779C010046372F /* Sources */,
+				14F2CDAA28779C010046372F /* Frameworks */,
+				14F2CDAB28779C010046372F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14F2CDAF28779C010046372F /* PBXTargetDependency */,
+			);
+			name = "Capstone ProjectUITests";
+			productName = "Capstone ProjectUITests";
+			productReference = 14F2CDAD28779C010046372F /* Capstone ProjectUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14F2CD8028779C000046372F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					14F2CD8728779C000046372F = {
+						CreatedOnToolsVersion = 13.4;
+					};
+					14F2CDA228779C010046372F = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 14F2CD8728779C000046372F;
+					};
+					14F2CDAC28779C010046372F = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 14F2CD8728779C000046372F;
+					};
+				};
+			};
+			buildConfigurationList = 14F2CD8328779C000046372F /* Build configuration list for PBXProject "Capstone Project" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14F2CD7F28779C000046372F;
+			productRefGroup = 14F2CD8928779C000046372F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14F2CD8728779C000046372F /* Capstone Project */,
+				14F2CDA228779C010046372F /* Capstone ProjectTests */,
+				14F2CDAC28779C010046372F /* Capstone ProjectUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14F2CD8628779C000046372F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F2CD9B28779C010046372F /* LaunchScreen.storyboard in Resources */,
+				14F2CD9828779C010046372F /* Assets.xcassets in Resources */,
+				14F2CD9628779C000046372F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14F2CDA128779C010046372F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14F2CDAB28779C010046372F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14F2CD8428779C000046372F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F2CD9328779C000046372F /* ViewController.m in Sources */,
+				14F2CD8D28779C000046372F /* AppDelegate.m in Sources */,
+				14F2CD9E28779C010046372F /* main.m in Sources */,
+				14F2CD9028779C000046372F /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14F2CD9F28779C010046372F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F2CDA828779C010046372F /* Capstone_ProjectTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14F2CDA928779C010046372F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F2CDB228779C010046372F /* Capstone_ProjectUITests.m in Sources */,
+				14F2CDB428779C010046372F /* Capstone_ProjectUITestsLaunchTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14F2CDA528779C010046372F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14F2CD8728779C000046372F /* Capstone Project */;
+			targetProxy = 14F2CDA428779C010046372F /* PBXContainerItemProxy */;
+		};
+		14F2CDAF28779C010046372F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14F2CD8728779C000046372F /* Capstone Project */;
+			targetProxy = 14F2CDAE28779C010046372F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		14F2CD9428779C000046372F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14F2CD9528779C000046372F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		14F2CD9928779C010046372F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14F2CD9A28779C010046372F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		14F2CDB528779C010046372F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		14F2CDB628779C010046372F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		14F2CDB828779C010046372F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6HQL8H2BW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Capstone Project/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hugomez.Capstone-Project";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14F2CDB928779C010046372F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6HQL8H2BW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Capstone Project/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hugomez.Capstone-Project";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		14F2CDBB28779C010046372F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6HQL8H2BW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hugomez.Capstone-ProjectTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capstone Project.app/Capstone Project";
+			};
+			name = Debug;
+		};
+		14F2CDBC28779C010046372F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6HQL8H2BW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hugomez.Capstone-ProjectTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capstone Project.app/Capstone Project";
+			};
+			name = Release;
+		};
+		14F2CDBE28779C010046372F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6HQL8H2BW;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hugomez.Capstone-ProjectUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Capstone Project";
+			};
+			name = Debug;
+		};
+		14F2CDBF28779C010046372F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6HQL8H2BW;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hugomez.Capstone-ProjectUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Capstone Project";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14F2CD8328779C000046372F /* Build configuration list for PBXProject "Capstone Project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F2CDB528779C010046372F /* Debug */,
+				14F2CDB628779C010046372F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14F2CDB728779C010046372F /* Build configuration list for PBXNativeTarget "Capstone Project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F2CDB828779C010046372F /* Debug */,
+				14F2CDB928779C010046372F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14F2CDBA28779C010046372F /* Build configuration list for PBXNativeTarget "Capstone ProjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F2CDBB28779C010046372F /* Debug */,
+				14F2CDBC28779C010046372F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14F2CDBD28779C010046372F /* Build configuration list for PBXNativeTarget "Capstone ProjectUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F2CDBE28779C010046372F /* Debug */,
+				14F2CDBF28779C010046372F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 14F2CD8028779C000046372F /* Project object */;
+}
