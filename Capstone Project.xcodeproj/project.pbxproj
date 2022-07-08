@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14188C792878AF7900F72209 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14188C782878AF7900F72209 /* LoginViewController.m */; };
+		14188C7C2878B0D800F72209 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14188C7B2878B0D800F72209 /* SignupViewController.m */; };
 		14F2CD8D28779C000046372F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8C28779C000046372F /* AppDelegate.m */; };
 		14F2CD9028779C000046372F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8F28779C000046372F /* SceneDelegate.m */; };
-		14F2CD9328779C000046372F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD9228779C000046372F /* ViewController.m */; };
 		14F2CD9628779C000046372F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9428779C000046372F /* Main.storyboard */; };
 		14F2CD9828779C010046372F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9728779C010046372F /* Assets.xcassets */; };
 		14F2CD9B28779C010046372F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9928779C010046372F /* LaunchScreen.storyboard */; };
@@ -41,13 +42,15 @@
 
 /* Begin PBXFileReference section */
 		0D1BB2FFC15DFA3E9B29C726 /* Pods-Capstone Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone Project.release.xcconfig"; path = "Target Support Files/Pods-Capstone Project/Pods-Capstone Project.release.xcconfig"; sourceTree = "<group>"; };
+		14188C772878AF7900F72209 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		14188C782878AF7900F72209 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		14188C7A2878B0D800F72209 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = ../SignupViewController.h; sourceTree = "<group>"; };
+		14188C7B2878B0D800F72209 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = ../SignupViewController.m; sourceTree = "<group>"; };
 		14F2CD8828779C000046372F /* Capstone Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F2CD8B28779C000046372F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14F2CD8C28779C000046372F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		14F2CD8E28779C000046372F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		14F2CD8F28779C000046372F /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		14F2CD9128779C000046372F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		14F2CD9228779C000046372F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		14F2CD9528779C000046372F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14F2CD9728779C010046372F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14F2CD9A28779C010046372F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,6 +99,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14188C702878AD7200F72209 /* User authentication */ = {
+			isa = PBXGroup;
+			children = (
+				14188C7A2878B0D800F72209 /* SignupViewController.h */,
+				14188C7B2878B0D800F72209 /* SignupViewController.m */,
+				14188C772878AF7900F72209 /* LoginViewController.h */,
+				14188C782878AF7900F72209 /* LoginViewController.m */,
+			);
+			path = "User authentication";
+			sourceTree = "<group>";
+		};
 		14F2CD7F28779C000046372F = {
 			isa = PBXGroup;
 			children = (
@@ -125,13 +139,12 @@
 				14F2CD8C28779C000046372F /* AppDelegate.m */,
 				14F2CD8E28779C000046372F /* SceneDelegate.h */,
 				14F2CD8F28779C000046372F /* SceneDelegate.m */,
-				14F2CD9128779C000046372F /* ViewController.h */,
-				14F2CD9228779C000046372F /* ViewController.m */,
 				14F2CD9428779C000046372F /* Main.storyboard */,
 				14F2CD9728779C010046372F /* Assets.xcassets */,
 				14F2CD9928779C010046372F /* LaunchScreen.storyboard */,
 				14F2CD9C28779C010046372F /* Info.plist */,
 				14F2CD9D28779C010046372F /* main.m */,
+				14188C702878AD7200F72209 /* User authentication */,
 			);
 			path = "Capstone Project";
 			sourceTree = "<group>";
@@ -173,7 +186,6 @@
 				8B33994236E34F98D5E78D29 /* Pods-Capstone ProjectTests.debug.xcconfig */,
 				DAF44F1D76E190B22327FB6F /* Pods-Capstone ProjectTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -415,10 +427,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14F2CD9328779C000046372F /* ViewController.m in Sources */,
 				14F2CD8D28779C000046372F /* AppDelegate.m in Sources */,
 				14F2CD9E28779C010046372F /* main.m in Sources */,
 				14F2CD9028779C000046372F /* SceneDelegate.m in Sources */,
+				14188C792878AF7900F72209 /* LoginViewController.m in Sources */,
+				14188C7C2878B0D800F72209 /* SignupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
