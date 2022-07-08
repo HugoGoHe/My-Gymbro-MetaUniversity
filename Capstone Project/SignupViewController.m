@@ -21,10 +21,12 @@
 }
 - (IBAction)didTapSignUp:(id)sender {
     
+    //Check for any blank fields
     if([self.passwordTextField.text isEqual:@""] || [self.confirmPasswordTextField.text isEqual:@""] || [self.usernameTextField.text isEqual:@""]){
         
         self.samePasswordLabel.text = @"One or more fields are Blank.";
     }else{
+        //Check if password fields are not the same
         if (![self.passwordTextField.text isEqual:self.confirmPasswordTextField.text]) {
             
             self.samePasswordLabel.text = @"Passwords must be the same.";
@@ -36,42 +38,41 @@
             newUser.username = self.usernameTextField.text;
             newUser.password = self.passwordTextField.text;
             
-            NSLog(@"SignUp completed :D!");
+            
             [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                //Check for existing error
                  if (error != nil) {
+                     
                      NSLog(@"Error: %@", error.localizedDescription);
+                     self.samePasswordLabel.text = error.localizedDescription;
                  } else {
-                     NSLog(@"User registered successfully");
-
-                     // manually segue to logged in view
+                     NSLog(@"SignUp completed :D!");
+                     
+                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations"
+                                                                                                message:@"Your account has been successfully created!"
+                                                                                         preferredStyle:(UIAlertControllerStyleAlert)];
+                     // create a ok action
+                     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                         style:UIAlertActionStyleCancel
+                                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                                              // handle cancel response here.
+                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                                       }];
+                     [alert addAction:okAction];
+                     
+                     [self presentViewController:alert animated:YES completion:^{
+                         // optional code for what happens after the alert controller has finished presenting
+                     }];
                  }
              }];
+            
             
 
             
             
     
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations"
-                                                                                       message:@"Your account has been successfully created!"
-                                                                                preferredStyle:(UIAlertControllerStyleAlert)];
-            // create a cancel action
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                style:UIAlertActionStyleCancel
-                                                              handler:^(UIAlertAction * _Nonnull action) {
-                                                                     // handle cancel response here. Doing nothing will dismiss the view.
-                [self dismissViewControllerAnimated:YES completion:nil];
-                                                              }];
-            [alert addAction:okAction];
-            
-            [self presentViewController:alert animated:YES completion:^{
-                // optional code for what happens after the alert controller has finished presenting
-            }];
-            
-            
+
         }
-        
-        
-        
     }
 }
 
