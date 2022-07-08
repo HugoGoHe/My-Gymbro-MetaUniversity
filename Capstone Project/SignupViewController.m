@@ -51,7 +51,7 @@
                      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations"
                                                                                                 message:@"Your account has been successfully created!"
                                                                                          preferredStyle:(UIAlertControllerStyleAlert)];
-                     // create a ok action
+                     // create an ok action
                      UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                                          style:UIAlertActionStyleCancel
                                                                        handler:^(UIAlertAction * _Nonnull action) {
