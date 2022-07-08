@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		14188C792878AF7900F72209 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14188C782878AF7900F72209 /* LoginViewController.m */; };
 		14188C7C2878B0D800F72209 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14188C7B2878B0D800F72209 /* SignupViewController.m */; };
+		14188C822878EF8400F72209 /* WorkoutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14188C812878EF8400F72209 /* WorkoutsViewController.m */; };
 		14F2CD8D28779C000046372F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8C28779C000046372F /* AppDelegate.m */; };
 		14F2CD9028779C000046372F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8F28779C000046372F /* SceneDelegate.m */; };
 		14F2CD9628779C000046372F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9428779C000046372F /* Main.storyboard */; };
@@ -46,6 +47,8 @@
 		14188C782878AF7900F72209 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		14188C7A2878B0D800F72209 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = ../SignupViewController.h; sourceTree = "<group>"; };
 		14188C7B2878B0D800F72209 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = ../SignupViewController.m; sourceTree = "<group>"; };
+		14188C802878EF8400F72209 /* WorkoutsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkoutsViewController.h; sourceTree = "<group>"; };
+		14188C812878EF8400F72209 /* WorkoutsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkoutsViewController.m; sourceTree = "<group>"; };
 		14F2CD8828779C000046372F /* Capstone Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F2CD8B28779C000046372F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14F2CD8C28779C000046372F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				14F2CD9C28779C010046372F /* Info.plist */,
 				14F2CD9D28779C010046372F /* main.m */,
 				14188C702878AD7200F72209 /* User authentication */,
+				14188C802878EF8400F72209 /* WorkoutsViewController.h */,
+				14188C812878EF8400F72209 /* WorkoutsViewController.m */,
 			);
 			path = "Capstone Project";
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 			files = (
 				14F2CD8D28779C000046372F /* AppDelegate.m in Sources */,
 				14F2CD9E28779C010046372F /* main.m in Sources */,
+				14188C822878EF8400F72209 /* WorkoutsViewController.m in Sources */,
 				14F2CD9028779C000046372F /* SceneDelegate.m in Sources */,
 				14188C792878AF7900F72209 /* LoginViewController.m in Sources */,
 				14188C7C2878B0D800F72209 /* SignupViewController.m in Sources */,
