@@ -51,7 +51,7 @@
 
     [self performSegueWithIdentifier:@"previewSegue" sender:nil];
 
-
+ 
     
 }
 
@@ -65,10 +65,12 @@
     if([[segue identifier] isEqualToString: @"previewSegue"]){
         UINavigationController *nav = [segue destinationViewController];
         PostPreviewViewController *ppvc = (PostPreviewViewController *) nav.topViewController;
-        
+     //   ppvc.progressPic.image = self.selectedImage;
         ppvc.selectedImage = self.selectedImage;
-        
+   
     }
+    
+
 }
 
 

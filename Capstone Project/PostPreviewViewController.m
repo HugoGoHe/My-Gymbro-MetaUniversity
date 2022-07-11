@@ -25,6 +25,7 @@
     self.dateLabel.text = dateString;
  
     
+    
     self.progressPic.image = self.selectedImage;
 }
 
