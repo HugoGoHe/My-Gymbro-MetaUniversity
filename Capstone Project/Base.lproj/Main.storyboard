@@ -158,7 +158,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Upload New Photo"/>
                                         <connections>
-                                            <segue destination="lqF-wZ-Enf" kind="presentation" id="ffv-sy-QT2"/>
+                                            <action selector="didTapNewPost:" destination="bVa-BQ-ZGc" eventType="touchUpInside" id="0lc-mM-jVx"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -181,6 +181,19 @@
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UZd-Iq-XRm">
                                             <rect key="frame" x="0.0" y="0.0" width="167" height="175"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GGD-1b-g7R">
+                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="175"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgR-cw-zBB">
+                                                    <rect key="frame" x="62" y="146" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="167" height="175"/>
                                     </collectionViewCell>
@@ -191,6 +204,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="aLf-Ax-kqW"/>
+                    <connections>
+                        <segue destination="lqF-wZ-Enf" kind="show" identifier="previewSegue" id="GY7-gO-uDB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y43-N1-WFS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -199,9 +215,9 @@
         <!--Post Preview View Controller-->
         <scene sceneID="7TF-Mx-adg">
             <objects>
-                <viewController id="0e1-HR-485" customClass="PostPreviewViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostPreviewViewController" id="0e1-HR-485" customClass="PostPreviewViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bqD-U5-sZB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ft-n8-jlT">
@@ -228,22 +244,23 @@
                     <navigationItem key="navigationItem" id="Ag8-M4-wTe">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="Owb-5t-TKy">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="tfW-nr-ljV">
-                                <rect key="frame" x="20" y="11" width="92" height="34.5"/>
+                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system"/>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="woF-V9-tCh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="60j-fn-QVM">
-                                <rect key="frame" x="302" y="11" width="92" height="34.5"/>
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="checkmark" catalog="system"/>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dateLabel" destination="8Ft-n8-jlT" id="B9u-2f-pz1"/>
                         <outlet property="progressPic" destination="23G-k1-5XV" id="R1H-6k-Emp"/>
                     </connections>
                 </viewController>
@@ -416,10 +433,11 @@
         <!--Navigation Controller-->
         <scene sceneID="6T7-Wk-aQT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lqF-wZ-Enf" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="tabby" automaticallyAdjustsScrollViewInsets="NO" id="lqF-wZ-Enf" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hcH-gO-nRf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CW5-j1-soP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -429,10 +447,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfX-Cw-ovP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1240.5797101449277" y="1818.75"/>
+            <point key="canvasLocation" x="1245" y="1819"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

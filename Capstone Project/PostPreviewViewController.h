@@ -9,8 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PostPreviewViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *progressPic;
+@interface PostPreviewViewController : UIViewController 
+@property (strong, nonatomic) IBOutlet UIImageView *progressPic;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) UIImage *selectedImage;
 
 @end
 

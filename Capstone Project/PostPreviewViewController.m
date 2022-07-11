@@ -16,38 +16,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self selectPicture];
+    
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+       [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    self.dateLabel.text = dateString;
+ 
+    
+    self.progressPic.image = self.selectedImage;
 }
 
 
-- (void)selectPicture{
-    //Code for modally presenting a UIImagePickerController screen
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
 
-    // The Xcode simulator does not support taking pictures, so let's first check that the camera is indeed supported on the device before trying to present it.
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
 
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    // Get the image captured by the UIImagePickerController
-    self.progressPic.image = info[UIImagePickerControllerOriginalImage];
-    
-    // Do something with the images (based on your use case)
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 /*
 #pragma mark - Navigation
 

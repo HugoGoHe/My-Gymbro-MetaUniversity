@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WeightLossViewController : UIViewController 
+@interface WeightLossViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
