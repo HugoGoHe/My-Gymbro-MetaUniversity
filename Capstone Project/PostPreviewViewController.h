@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PostPreviewViewController : UIViewController 
 @property (strong, nonatomic) IBOutlet UIImageView *progressPic;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UITextField *weightLabel;
 @property (strong, nonatomic) UIImage *selectedImage;
 
 @end

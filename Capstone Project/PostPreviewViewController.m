@@ -6,9 +6,10 @@
 //
 
 #import "PostPreviewViewController.h"
+#import "Post.h"
 
 @interface PostPreviewViewController ()
-
+@property(nonatomic, strong) NSDate *currentDate;
 @end
 
 @implementation PostPreviewViewController
@@ -17,11 +18,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSDate *currentDate = [NSDate date];
+    self.currentDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
     
-    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSString *dateString = [dateFormatter stringFromDate:self.currentDate];
     self.dateLabel.text = dateString;
  
     
@@ -30,6 +31,15 @@
 }
 
 
+- (IBAction)didTapCheckMark:(id)sender {
+    [Post postUserImage:self.selectedImage withWeight:[self.weightLabel.text floatValue] withDate:self.currentDate withCompletion:nil];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *nav = [storyboard instantiateViewControllerWithIdentifier: @"TabBarViewController"];
+    [nav setModalPresentationStyle:UIModalPresentationFullScreen];
+    [nav setSelectedViewController:[nav.viewControllers objectAtIndex:0]];
+    [self.navigationController presentViewController:nav animated:YES completion:nil]; 
+}
 
 
 /*

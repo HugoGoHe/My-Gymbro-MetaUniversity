@@ -256,12 +256,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="checkmark" catalog="system"/>
+                                <connections>
+                                    <action selector="didTapCheckMark:" destination="0e1-HR-485" eventType="touchUpInside" id="N7q-31-wXX"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="8Ft-n8-jlT" id="B9u-2f-pz1"/>
                         <outlet property="progressPic" destination="23G-k1-5XV" id="R1H-6k-Emp"/>
+                        <outlet property="weightLabel" destination="Zll-Gv-Dmk" id="KUc-PE-FpR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0x-ID-WFL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
