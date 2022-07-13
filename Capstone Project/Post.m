@@ -12,6 +12,7 @@
 @dynamic postedAt;
 @dynamic weight;
 @dynamic image;
+@dynamic author;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -24,6 +25,7 @@
     newPost.postedAt = postedAt;
     newPost.weight = weight;
     newPost.image = [self getPFFileFromImage:image];
+    newPost.author = [PFUser currentUser];
     
     [newPost saveInBackgroundWithBlock:completion];
 }

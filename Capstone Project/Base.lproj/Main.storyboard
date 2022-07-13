@@ -148,8 +148,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="usA-vz-Mvs">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="usA-vz-Mvs">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="jHL-pD-tW3">
                                     <size key="itemSize" width="0.0" height="0.0"/>
@@ -186,11 +187,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eaS-eM-p7S"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="usA-vz-Mvs" firstAttribute="leading" secondItem="eaS-eM-p7S" secondAttribute="leading" id="BYg-j8-neb"/>
-                            <constraint firstItem="usA-vz-Mvs" firstAttribute="trailing" secondItem="eaS-eM-p7S" secondAttribute="trailing" id="ZwG-bb-xLv"/>
-                            <constraint firstItem="usA-vz-Mvs" firstAttribute="bottom" secondItem="eaS-eM-p7S" secondAttribute="bottom" id="hmK-UJ-Lu9"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aLf-Ax-kqW">
                         <nil key="title"/>

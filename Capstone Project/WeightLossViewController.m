@@ -38,7 +38,9 @@
     //Initialize a UIRefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView insertSubview:self.refreshControl atIndex:0];
+    [self.collectionView addSubview:self.refreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
+
 }
 
 - (IBAction)didTapNewPost:(id)sender {
@@ -103,7 +105,7 @@
         if (posts) {
             // do something with the data fetched
             self.arrayOfPosts = (NSMutableArray *)posts;
-
+            NSLog(@"%@", self.arrayOfPosts);
             [self.collectionView reloadData];
 
         }
@@ -123,7 +125,7 @@
         [self.refreshControl endRefreshing];
 
     }];
-    
+
 }
 
 - (void) didPost{
@@ -132,7 +134,8 @@
     [self.collectionView reloadData];
 }
 
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     PictureGridCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Picture Grid Cell" forIndexPath:indexPath];
     
     Post *post1 = self.arrayOfPosts[indexPath.row];
@@ -146,19 +149,20 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-        return self.arrayOfPosts.count;
+    NSLog(@"%lu", self.arrayOfPosts.count);
+    return self.arrayOfPosts.count;
 }
 
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    self.flowLayout.minimumLineSpacing = 0;
-    self.flowLayout.minimumInteritemSpacing = 0;
-}
+//- (void)viewDidLayoutSubviews{
+//    [super viewDidLayoutSubviews];
+//    self.flowLayout.minimumLineSpacing = 0;
+//    self.flowLayout.minimumInteritemSpacing = 0;
+//}
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *) collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return CGSizeMake(self.view.frame.size.width/3, 128);
-
+   
 }
 
 @end

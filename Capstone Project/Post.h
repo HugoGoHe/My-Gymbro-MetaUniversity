@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDate *postedAt;
 @property (nonatomic) float weight;
 @property (nonatomic, strong) PFFileObject *image;
-
+@property (nonatomic, strong) PFUser *author;
 
 + (void) postUserImage: ( UIImage * _Nullable )image withWeight: (float)weight  withDate: (NSDate *_Nullable)postedAt withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
