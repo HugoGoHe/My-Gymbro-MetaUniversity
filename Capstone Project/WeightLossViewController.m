@@ -7,9 +7,20 @@
 
 #import "WeightLossViewController.h"
 #import "PostPreviewViewController.h"
+#import "Parse/Parse.h"
+#import "Post.h"
+#import "PictureGridCell.h"
 
-@interface WeightLossViewController ()
+
+@interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PostPreviewViewControllerDelegate>
+
 @property(strong,nonatomic) UIImage *selectedImage;
+@property (strong, nonatomic) NSMutableArray *arrayOfPosts;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+
+
 @end
 
 @implementation WeightLossViewController
@@ -17,6 +28,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    self.arrayOfPosts = [[NSMutableArray alloc] init];
+    [self getPosts];
+    
+    //Initialize a UIRefreshControl
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (IBAction)didTapNewPost:(id)sender {
@@ -73,5 +95,70 @@
 
 }
 
+- (void) getPosts{
+    PFQuery *postQuery = [Post query];
+    [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
+    
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+            self.arrayOfPosts = (NSMutableArray *)posts;
+
+            [self.collectionView reloadData];
+
+        }
+        else {
+            // handle error
+            NSLog(@"%@", error.localizedDescription);
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Posts"
+                                           message:@"The internet connection appears to be offline."
+                                           preferredStyle:UIAlertControllerStyleAlert];
+             
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+               handler:^(UIAlertAction * action) {}];
+             
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        [self.refreshControl endRefreshing];
+
+    }];
+    
+}
+
+- (void) didPost{
+    
+    [self getPosts];
+    [self.collectionView reloadData];
+}
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PictureGridCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Picture Grid Cell" forIndexPath:indexPath];
+    
+    Post *post1 = self.arrayOfPosts[indexPath.row];
+    
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:post1.image.url]];
+    cell.progressPic.image = [UIImage imageWithData:imageData];
+    
+    
+    return cell;
+    
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+        return self.arrayOfPosts.count;
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.flowLayout.minimumLineSpacing = 0;
+    self.flowLayout.minimumInteritemSpacing = 0;
+}
+
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *) collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(self.view.frame.size.width/3, 128);
+
+}
 
 @end

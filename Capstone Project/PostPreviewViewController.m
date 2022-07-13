@@ -38,9 +38,18 @@
     UITabBarController *nav = [storyboard instantiateViewControllerWithIdentifier: @"TabBarViewController"];
     [nav setModalPresentationStyle:UIModalPresentationFullScreen];
     [nav setSelectedViewController:[nav.viewControllers objectAtIndex:0]];
-    [self.navigationController presentViewController:nav animated:YES completion:nil]; 
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    
+    [self.delegate didPost];
 }
 
+- (IBAction)didTapBack:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *nav = [storyboard instantiateViewControllerWithIdentifier: @"TabBarViewController"];
+    [nav setModalPresentationStyle:UIModalPresentationFullScreen];
+    [nav setSelectedViewController:[nav.viewControllers objectAtIndex:0]];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation

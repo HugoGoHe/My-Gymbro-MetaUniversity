@@ -13,6 +13,7 @@
 		14188C822878EF8400F72209 /* WorkoutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14188C812878EF8400F72209 /* WorkoutsViewController.m */; };
 		14314D7F287C9E3200467223 /* PostPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D7E287C9E3200467223 /* PostPreviewViewController.m */; };
 		14314D82287CDF5A00467223 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D81287CDF5A00467223 /* Post.m */; };
+		14314D89287DF14800467223 /* PictureGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D88287DF14800467223 /* PictureGridCell.m */; };
 		14F2CD8D28779C000046372F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8C28779C000046372F /* AppDelegate.m */; };
 		14F2CD9028779C000046372F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8F28779C000046372F /* SceneDelegate.m */; };
 		14F2CD9628779C000046372F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9428779C000046372F /* Main.storyboard */; };
@@ -58,6 +59,8 @@
 		14314D7E287C9E3200467223 /* PostPreviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostPreviewViewController.m; sourceTree = "<group>"; };
 		14314D80287CDF5A00467223 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		14314D81287CDF5A00467223 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		14314D87287DF14800467223 /* PictureGridCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureGridCell.h; sourceTree = "<group>"; };
+		14314D88287DF14800467223 /* PictureGridCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureGridCell.m; sourceTree = "<group>"; };
 		14F2CD8828779C000046372F /* Capstone Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F2CD8B28779C000046372F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14F2CD8C28779C000046372F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -122,10 +125,20 @@
 			path = "User authentication";
 			sourceTree = "<group>";
 		};
+		14314D83287DF08800467223 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				14314D87287DF14800467223 /* PictureGridCell.h */,
+				14314D88287DF14800467223 /* PictureGridCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		14F2CD7F28779C000046372F = {
 			isa = PBXGroup;
 			children = (
 				14F2CD8A28779C000046372F /* Capstone Project */,
+				14314D83287DF08800467223 /* Cells */,
 				14F2CDA628779C010046372F /* Capstone ProjectTests */,
 				14F2CDB028779C010046372F /* Capstone ProjectUITests */,
 				14F2CD8928779C000046372F /* Products */,
@@ -451,6 +464,7 @@
 				14F2CD9E28779C010046372F /* main.m in Sources */,
 				14188C822878EF8400F72209 /* WorkoutsViewController.m in Sources */,
 				14F2CD9028779C000046372F /* SceneDelegate.m in Sources */,
+				14314D89287DF14800467223 /* PictureGridCell.m in Sources */,
 				14314D82287CDF5A00467223 /* Post.m in Sources */,
 				14188C792878AF7900F72209 /* LoginViewController.m in Sources */,
 				14314D7F287C9E3200467223 /* PostPreviewViewController.m in Sources */,
