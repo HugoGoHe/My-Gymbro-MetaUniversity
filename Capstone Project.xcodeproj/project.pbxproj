@@ -14,6 +14,9 @@
 		14314D7F287C9E3200467223 /* PostPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D7E287C9E3200467223 /* PostPreviewViewController.m */; };
 		14314D82287CDF5A00467223 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D81287CDF5A00467223 /* Post.m */; };
 		14314D89287DF14800467223 /* PictureGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D88287DF14800467223 /* PictureGridCell.m */; };
+		14BDE87D28809FC9008359F5 /* WorkoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BDE87C28809FC9008359F5 /* WorkoutCell.m */; };
+		14BDE8832880CDCB008359F5 /* CurrentWorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BDE8822880CDCB008359F5 /* CurrentWorkoutViewController.m */; };
+		14C2ECF52880995E00E1000A /* Workout.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C2ECF42880995E00E1000A /* Workout.m */; };
 		14F2CD8D28779C000046372F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8C28779C000046372F /* AppDelegate.m */; };
 		14F2CD9028779C000046372F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8F28779C000046372F /* SceneDelegate.m */; };
 		14F2CD9628779C000046372F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9428779C000046372F /* Main.storyboard */; };
@@ -61,6 +64,12 @@
 		14314D81287CDF5A00467223 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		14314D87287DF14800467223 /* PictureGridCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureGridCell.h; sourceTree = "<group>"; };
 		14314D88287DF14800467223 /* PictureGridCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureGridCell.m; sourceTree = "<group>"; };
+		14BDE87B28809FC9008359F5 /* WorkoutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkoutCell.h; sourceTree = "<group>"; };
+		14BDE87C28809FC9008359F5 /* WorkoutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkoutCell.m; sourceTree = "<group>"; };
+		14BDE8812880CDCB008359F5 /* CurrentWorkoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CurrentWorkoutViewController.h; path = ../CurrentWorkoutViewController.h; sourceTree = "<group>"; };
+		14BDE8822880CDCB008359F5 /* CurrentWorkoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CurrentWorkoutViewController.m; path = ../CurrentWorkoutViewController.m; sourceTree = "<group>"; };
+		14C2ECF32880995E00E1000A /* Workout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Workout.h; sourceTree = "<group>"; };
+		14C2ECF42880995E00E1000A /* Workout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Workout.m; sourceTree = "<group>"; };
 		14F2CD8828779C000046372F /* Capstone Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F2CD8B28779C000046372F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14F2CD8C28779C000046372F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -130,15 +139,27 @@
 			children = (
 				14314D87287DF14800467223 /* PictureGridCell.h */,
 				14314D88287DF14800467223 /* PictureGridCell.m */,
+				14BDE87B28809FC9008359F5 /* WorkoutCell.h */,
+				14BDE87C28809FC9008359F5 /* WorkoutCell.m */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		14C2ECF6288099C900E1000A /* PFObjects */ = {
+			isa = PBXGroup;
+			children = (
+				14314D80287CDF5A00467223 /* Post.h */,
+				14314D81287CDF5A00467223 /* Post.m */,
+				14C2ECF32880995E00E1000A /* Workout.h */,
+				14C2ECF42880995E00E1000A /* Workout.m */,
+			);
+			path = PFObjects;
 			sourceTree = "<group>";
 		};
 		14F2CD7F28779C000046372F = {
 			isa = PBXGroup;
 			children = (
 				14F2CD8A28779C000046372F /* Capstone Project */,
-				14314D83287DF08800467223 /* Cells */,
 				14F2CDA628779C010046372F /* Capstone ProjectTests */,
 				14F2CDB028779C010046372F /* Capstone ProjectUITests */,
 				14F2CD8928779C000046372F /* Products */,
@@ -165,19 +186,21 @@
 				14F2CD8E28779C000046372F /* SceneDelegate.h */,
 				14F2CD8F28779C000046372F /* SceneDelegate.m */,
 				14F2CD9428779C000046372F /* Main.storyboard */,
-				14314D80287CDF5A00467223 /* Post.h */,
-				14314D81287CDF5A00467223 /* Post.m */,
 				14F2CD9728779C010046372F /* Assets.xcassets */,
 				14F2CD9928779C010046372F /* LaunchScreen.storyboard */,
 				14F2CD9C28779C010046372F /* Info.plist */,
 				14F2CD9D28779C010046372F /* main.m */,
-				14188C702878AD7200F72209 /* User authentication */,
 				14188C802878EF8400F72209 /* WorkoutsViewController.h */,
 				14188C812878EF8400F72209 /* WorkoutsViewController.m */,
 				1413AAD1287BF28100373D1B /* WeightLossViewController.h */,
 				1413AAD2287BF28100373D1B /* WeightLossViewController.m */,
 				14314D7D287C9E3200467223 /* PostPreviewViewController.h */,
 				14314D7E287C9E3200467223 /* PostPreviewViewController.m */,
+				14BDE8812880CDCB008359F5 /* CurrentWorkoutViewController.h */,
+				14BDE8822880CDCB008359F5 /* CurrentWorkoutViewController.m */,
+				14188C702878AD7200F72209 /* User authentication */,
+				14314D83287DF08800467223 /* Cells */,
+				14C2ECF6288099C900E1000A /* PFObjects */,
 			);
 			path = "Capstone Project";
 			sourceTree = "<group>";
@@ -470,6 +493,9 @@
 				14314D7F287C9E3200467223 /* PostPreviewViewController.m in Sources */,
 				1413AAD3287BF28100373D1B /* WeightLossViewController.m in Sources */,
 				14188C7C2878B0D800F72209 /* SignupViewController.m in Sources */,
+				14BDE8832880CDCB008359F5 /* CurrentWorkoutViewController.m in Sources */,
+				14C2ECF52880995E00E1000A /* Workout.m in Sources */,
+				14BDE87D28809FC9008359F5 /* WorkoutCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

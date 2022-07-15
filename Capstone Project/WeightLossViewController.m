@@ -105,7 +105,6 @@
         if (posts) {
             // do something with the data fetched
             self.arrayOfPosts = (NSMutableArray *)posts;
-            NSLog(@"%@", self.arrayOfPosts);
             [self.collectionView reloadData];
 
         }
@@ -149,7 +148,6 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"%lu", self.arrayOfPosts.count);
     return self.arrayOfPosts.count;
 }
 
