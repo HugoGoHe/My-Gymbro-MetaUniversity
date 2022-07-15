@@ -76,8 +76,8 @@
             [alert addAction:defaultAction];
             [self presentViewController:alert animated:YES completion:nil];
         }
-      //  [self.refreshControl endRefreshing];
-        NSLog(@"%@", self.arrayOfWorkouts);
+        [self.refreshControl endRefreshing];
+     
 
     }];
     

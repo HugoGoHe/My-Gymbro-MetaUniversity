@@ -18,6 +18,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the
     NSLog(@"%hhu",self.exists);
+    
+    if(self.exists){
+        self.name.text = self.selectedWorkout.name;
+        self.date.date = self.selectedWorkout.date;
+    }
 }
 
 
