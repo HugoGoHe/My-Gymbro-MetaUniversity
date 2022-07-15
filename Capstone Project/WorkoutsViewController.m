@@ -10,10 +10,12 @@
 #import "LoginViewController.h"
 #import "WorkoutCell.h"
 #import "Workout.h"
+#import "CurrentWorkoutViewController.h"
 
 @interface WorkoutsViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *arrayOfWorkouts;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -28,6 +30,12 @@
     
     self.arrayOfWorkouts = [[NSMutableArray alloc] init];
     [self getWorkouts];
+    
+    //Initialize a UIRefreshControl
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getWorkouts) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+
 }
 - (IBAction)didTapLogout:(id)sender {
 
@@ -45,6 +53,8 @@
     
     PFQuery *workoutQuery = [Workout query];
     [workoutQuery whereKey:@"author" equalTo: [PFUser currentUser]];
+    [workoutQuery orderByDescending:@"date"];
+
     
     [workoutQuery findObjectsInBackgroundWithBlock:^(NSArray<Workout *> * _Nullable workouts, NSError * _Nullable error) {
         if (workouts) {
@@ -74,15 +84,43 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([[segue identifier] isEqualToString: @"fromNew"]){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier: @"currentWorkout"];
+        [nav setModalPresentationStyle:UIModalPresentationFullScreen];
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+    }
+    
+    if([[segue identifier] isEqualToString: @"fromCell"]){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier: @"currentWorkout"];
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
+        NSInteger index = myIndexPath.row;
+        Workout *selectedWorkout = self.arrayOfWorkouts[index];
+        
+        CurrentWorkoutViewController *cwvc = (CurrentWorkoutViewController *) nav.topViewController;
+        
+        cwvc.selectedWorkout = selectedWorkout;
+        cwvc.exists = TRUE;
+
+        
+        [nav setModalPresentationStyle:UIModalPresentationFullScreen];
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+        
+        
+    }
+
+    
 }
-*/
+
 
 
 

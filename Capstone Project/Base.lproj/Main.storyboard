@@ -304,7 +304,7 @@
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="New Workout"/>
                                             <connections>
-                                                <segue destination="urd-De-7Hj" kind="show" id="2We-pi-M4Q"/>
+                                                <segue destination="urd-De-7Hj" kind="show" identifier="fromNew" id="2We-pi-M4Q"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -337,6 +337,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="aJS-fu-nHh" id="RqY-9X-9xX"/>
                                             <outlet property="nameLabel" destination="zeR-Vb-Nx9" id="X5d-b2-jQ9"/>
+                                            <segue destination="urd-De-7Hj" kind="show" identifier="fromCell" id="Lxs-az-UT1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -391,14 +392,25 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="AD3-Ur-0eC">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="aNT-aE-PWy">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="qFb-1E-hnP">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="DRU-7m-zra">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="cAQ-mm-hrn">
                                 <rect key="frame" x="20" y="5" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
                                 <connections>
-                                    <action selector="didTapBack:" destination="CR1-t3-jGR" eventType="touchUpInside" id="JBj-FI-DCd"/>
+                                    <action selector="didTapCancel:" destination="CR1-t3-jGR" eventType="touchUpInside" id="x6q-Ia-U94"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="AiF-ee-mBv">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Fav-YK-y2V">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="didTapSave:" destination="CR1-t3-jGR" eventType="touchUpInside" id="ONY-Jq-bgr"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -535,7 +547,7 @@
         <!--Navigation Controller-->
         <scene sceneID="V4W-Iu-4xd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="urd-De-7Hj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="currentWorkout" automaticallyAdjustsScrollViewInsets="NO" id="urd-De-7Hj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="vYK-IL-M6z"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zFS-0B-BRl">
@@ -552,6 +564,9 @@
             <point key="canvasLocation" x="4047.826086956522" y="2566.7410714285711"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2We-pi-M4Q"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>

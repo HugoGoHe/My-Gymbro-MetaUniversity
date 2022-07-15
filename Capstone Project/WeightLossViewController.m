@@ -100,6 +100,8 @@
 - (void) getPosts{
     PFQuery *postQuery = [Post query];
     [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
+    [postQuery orderByDescending:@"createdAt"];
+
     
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
