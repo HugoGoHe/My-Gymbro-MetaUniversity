@@ -149,12 +149,14 @@
         
         //I have to wait this long to be able to call reloadData and that the database is updated
         [self.arrayOfWorkouts[indexPath.row] deleteInBackground];
-        [NSTimer scheduledTimerWithTimeInterval:0.2
-            target:self
-            selector:@selector(getWorkouts)
-            userInfo:nil
-            repeats:NO];
-        
+        [self.arrayOfWorkouts removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        [NSTimer scheduledTimerWithTimeInterval:0.2
+//            target:self
+//            selector:@selector(getWorkouts)
+//            userInfo:nil
+//            repeats:NO];			
+        [self.tableView reloadData];
         
     }
 }
