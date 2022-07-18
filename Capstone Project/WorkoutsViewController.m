@@ -143,5 +143,23 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        
+        //I have to wait this long to be able to call reloadData and that the database is updated
+        [self.arrayOfWorkouts[indexPath.row] deleteInBackground];
+        [NSTimer scheduledTimerWithTimeInterval:0.2
+            target:self
+            selector:@selector(getWorkouts)
+            userInfo:nil
+            repeats:NO];
+        
+        
+    }
+}
+
+
+
 
 @end

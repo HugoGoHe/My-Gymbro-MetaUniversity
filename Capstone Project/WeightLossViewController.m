@@ -108,7 +108,7 @@
             // do something with the data fetched
             self.arrayOfPosts = (NSMutableArray *)posts;
             [self.collectionView reloadData];
-
+            NSLog(@"here");
         }
         else {
             // handle error
@@ -144,8 +144,9 @@
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:post1.image.url]];
     cell.progressPic.image = [UIImage imageWithData:imageData];
     
-    
+    NSLog(@"now");
     return cell;
+    
     
 }
 
