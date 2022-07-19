@@ -5,9 +5,9 @@
 //  Created by Hugo Gomez Herrera on 7/11/22.
 //
 
-#import "Post.h"
+#import "ProgressPic.h"
 
-@implementation Post
+@implementation ProgressPic
 
 @dynamic postedAt;
 @dynamic weight;
@@ -19,7 +19,7 @@
 }
 
 + (void) postUserImage: ( UIImage * _Nullable )image withWeight: (float)weight  withDate: (NSDate *_Nullable)postedAt withCompletion: (PFBooleanResultBlock  _Nullable)completion{
-    Post *newPost = [Post new];
+    ProgressPic *newPost = [ProgressPic new];
     newPost.postedAt = postedAt;
     newPost.weight = weight;
     newPost.image = [self getPFFileFromImage:image];
