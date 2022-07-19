@@ -6,7 +6,7 @@
 //
 
 #import "PostPreviewViewController.h"
-#import "Post.h"
+#import "ProgressPic.h"
 
 @interface PostPreviewViewController ()
 
@@ -27,7 +27,11 @@
 }
 
 - (IBAction)didTapCheckMark:(id)sender {
-    [Post postUserImage:self.selectedImage withWeight:[self.weightLabel.text floatValue] withDate:self.currentDate withCompletion:nil];
+    [ProgressPic postUserImage:self.selectedImage withWeight:[self.weightLabel.text floatValue] withDate:self.currentDate withCompletion:^(BOOL succeeded, NSError * _Nullable error){
+        if(!error){
+            [self.delegate didPost];
+        }
+    }];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UITabBarController *nav = [storyboard instantiateViewControllerWithIdentifier: @"TabBarViewController"];
@@ -35,7 +39,6 @@
     [nav setSelectedViewController:[nav.viewControllers objectAtIndex:0]];
     [self.navigationController presentViewController:nav animated:YES completion:nil];
     
-    [self.delegate didPost];
 }
 
 - (IBAction)didTapBack:(id)sender {

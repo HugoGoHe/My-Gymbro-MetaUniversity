@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Post : PFObject<PFSubclassing>
+@interface ProgressPic : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSDate *postedAt;
 @property (nonatomic) float weight;

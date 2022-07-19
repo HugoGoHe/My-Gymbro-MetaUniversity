@@ -8,7 +8,7 @@
 #import "WeightLossViewController.h"
 #import "PostPreviewViewController.h"
 #import "Parse/Parse.h"
-#import "Post.h"
+#import "ProgressPic.h"
 #import "PictureGridCell.h"
 
 @interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PostPreviewViewControllerDelegate>
@@ -28,11 +28,11 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.arrayOfPosts = [[NSMutableArray alloc] init];
-    [self getPosts];
+    [self getProgressPics];
     
     //Initialize a UIRefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(getProgressPics) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
 }
@@ -48,7 +48,6 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
@@ -61,12 +60,12 @@
     [self performSegueWithIdentifier:@"previewSegue" sender:nil];
 }
 
-- (void) getPosts{
+- (void) getProgressPics{
     //Performing query to get the posts of the user from newest to oldest
-    PFQuery *postQuery = [Post query];
-    [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+    PFQuery *getQuery = [ProgressPic query];
+    [getQuery whereKey:@"author" equalTo:[PFUser currentUser]];
+    [getQuery orderByDescending:@"createdAt"];
+    [getQuery findObjectsInBackgroundWithBlock:^(NSArray<ProgressPic *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             //Storing the data in an array and reloading the collectionView
             self.arrayOfPosts = (NSMutableArray *)posts;
@@ -74,7 +73,6 @@
         }
         else {
             // handle error
-            NSLog(@"%@", error.localizedDescription);
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Posts"
                                                                            message:@"The internet connection appears to be offline."
                                                                     preferredStyle:UIAlertControllerStyleAlert];
@@ -90,14 +88,13 @@
 }
 
 - (void) didPost{
-    [self getPosts];
-    [self.collectionView reloadData];
+    [self getProgressPics];
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PictureGridCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Picture Grid Cell" forIndexPath:indexPath];
-    Post *post1 = self.arrayOfPosts[indexPath.row];
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:post1.image.url]];
+    ProgressPic *progressPic = self.arrayOfPosts[indexPath.row];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:progressPic.image.url]];
     cell.progressPic.image = [UIImage imageWithData:imageData];
     return cell;  
 }
@@ -122,6 +119,7 @@
         UINavigationController *nav = [segue destinationViewController];
         PostPreviewViewController *ppvc = (PostPreviewViewController *) nav.topViewController;
         ppvc.selectedImage = self.selectedImage;
+        ppvc.delegate = self;
     }
 }
 @end

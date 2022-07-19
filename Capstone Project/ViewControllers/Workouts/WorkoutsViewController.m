@@ -12,7 +12,7 @@
 #import "Workout.h"
 #import "CurrentWorkoutViewController.h"
 
-@interface WorkoutsViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface WorkoutsViewController ()<UITableViewDelegate, UITableViewDataSource, CurrentWorkoutViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *arrayOfWorkouts;
@@ -108,6 +108,9 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier: @"currentWorkout"];
         
+        CurrentWorkoutViewController *cwvc = (CurrentWorkoutViewController *) nav.topViewController;
+        cwvc.delegate = self;
+        
         [nav setModalPresentationStyle:UIModalPresentationFullScreen];
         [self.navigationController presentViewController:nav animated:YES completion:nil];
     }
@@ -122,6 +125,7 @@
         CurrentWorkoutViewController *cwvc = (CurrentWorkoutViewController *) nav.topViewController;
         cwvc.selectedWorkout = selectedWorkout;
         cwvc.exists = TRUE;
+        cwvc.delegate = self;
         
         [nav setModalPresentationStyle:UIModalPresentationFullScreen];
         [self.navigationController presentViewController:nav animated:YES completion:nil];
