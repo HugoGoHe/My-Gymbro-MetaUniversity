@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *weightLabel;
 @property (strong, nonatomic) UIImage *selectedImage;
-
 @property (strong, nonatomic) id<PostPreviewViewControllerDelegate> delegate;
 
 @end

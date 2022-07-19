@@ -16,74 +16,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
 }
+
 - (IBAction)didTapSignUp:(id)sender {
     
     //Check for any blank fields
     if([self.passwordTextField.text isEqual:@""] || [self.confirmPasswordTextField.text isEqual:@""] || [self.usernameTextField.text isEqual:@""]){
-        
         self.samePasswordLabel.text = @"One or more fields are Blank.";
     }else{
         //Check if password fields are not the same
         if (![self.passwordTextField.text isEqual:self.confirmPasswordTextField.text]) {
-            
             self.samePasswordLabel.text = @"Passwords must be the same.";
         }else{
-            
             self.samePasswordLabel.text = @"";
             PFUser *newUser = [PFUser user];
-            
             newUser.username = self.usernameTextField.text;
             newUser.password = self.passwordTextField.text;
-            
-            
             [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                 //Check for existing error
-                 if (error != nil) {
-                     
-                     NSLog(@"Error: %@", error.localizedDescription);
-                     self.samePasswordLabel.text = error.localizedDescription;
-                 } else {
-                     NSLog(@"SignUp completed :D!");
-                     
-                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations"
-                                                                                                message:@"Your account has been successfully created!"
-                                                                                         preferredStyle:(UIAlertControllerStyleAlert)];
-                     // create an ok action
-                     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                         style:UIAlertActionStyleCancel
-                                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                                              // handle cancel response here.
-                         [self dismissViewControllerAnimated:YES completion:nil];
-                                                                       }];
-                     [alert addAction:okAction];
-                     
-                     [self presentViewController:alert animated:YES completion:^{
-                         // optional code for what happens after the alert controller has finished presenting
-                     }];
-                 }
-             }];
-            
-            
-
-            
-            
-    
-
+                if (error != nil) {
+                    self.samePasswordLabel.text = error.localizedDescription;
+                } else {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congratulations"
+                                                                                   message:@"Your account has been successfully created!"
+                                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+                    // create an ok action
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                       style:UIAlertActionStyleCancel
+                                                                     handler:^(UIAlertAction * _Nonnull action) {
+                        // handle cancel response here.
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                    [alert addAction:okAction];
+                    [self presentViewController:alert animated:YES completion:^{
+                        // optional code for what happens after the alert controller has finished presenting
+                    }];
+                }
+            }];
         }
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

@@ -18,12 +18,10 @@
 }
 
 + (void) newWorkout: ( NSString * _Nullable )name withDate: ( NSDate * _Nullable )date withCompletion: (PFBooleanResultBlock  _Nullable)completion{
-    
     Workout *newWorkout = [Workout new];
     newWorkout.date = date;
     newWorkout.name = name;
     newWorkout.author = [PFUser currentUser];
-    
     [newWorkout saveInBackgroundWithBlock:completion];
 }
 

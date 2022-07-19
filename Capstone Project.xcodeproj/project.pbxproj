@@ -145,6 +145,37 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		14C28ED628861E4C007F0031 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				14C28ED828861E9F007F0031 /* Workouts */,
+				14C28ED728861E8F007F0031 /* WeightLoss */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		14C28ED728861E8F007F0031 /* WeightLoss */ = {
+			isa = PBXGroup;
+			children = (
+				1413AAD1287BF28100373D1B /* WeightLossViewController.h */,
+				1413AAD2287BF28100373D1B /* WeightLossViewController.m */,
+				14314D7D287C9E3200467223 /* PostPreviewViewController.h */,
+				14314D7E287C9E3200467223 /* PostPreviewViewController.m */,
+			);
+			path = WeightLoss;
+			sourceTree = "<group>";
+		};
+		14C28ED828861E9F007F0031 /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				14188C802878EF8400F72209 /* WorkoutsViewController.h */,
+				14188C812878EF8400F72209 /* WorkoutsViewController.m */,
+				1438053F288209C6000CA2D4 /* CurrentWorkoutViewController.m */,
+				14380541288209CE000CA2D4 /* CurrentWorkoutViewController.h */,
+			);
+			path = Workouts;
+			sourceTree = "<group>";
+		};
 		14C2ECF6288099C900E1000A /* PFObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,8 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				14F2CD8B28779C000046372F /* AppDelegate.h */,
-				1438053F288209C6000CA2D4 /* CurrentWorkoutViewController.m */,
-				14380541288209CE000CA2D4 /* CurrentWorkoutViewController.h */,
 				14F2CD8C28779C000046372F /* AppDelegate.m */,
 				14F2CD8E28779C000046372F /* SceneDelegate.h */,
 				14F2CD8F28779C000046372F /* SceneDelegate.m */,
@@ -192,13 +221,8 @@
 				14F2CD9928779C010046372F /* LaunchScreen.storyboard */,
 				14F2CD9C28779C010046372F /* Info.plist */,
 				14F2CD9D28779C010046372F /* main.m */,
-				14188C802878EF8400F72209 /* WorkoutsViewController.h */,
-				14188C812878EF8400F72209 /* WorkoutsViewController.m */,
-				1413AAD1287BF28100373D1B /* WeightLossViewController.h */,
-				1413AAD2287BF28100373D1B /* WeightLossViewController.m */,
-				14314D7D287C9E3200467223 /* PostPreviewViewController.h */,
-				14314D7E287C9E3200467223 /* PostPreviewViewController.m */,
 				14188C702878AD7200F72209 /* User authentication */,
+				14C28ED628861E4C007F0031 /* ViewControllers */,
 				14314D83287DF08800467223 /* Cells */,
 				14C2ECF6288099C900E1000A /* PFObjects */,
 			);

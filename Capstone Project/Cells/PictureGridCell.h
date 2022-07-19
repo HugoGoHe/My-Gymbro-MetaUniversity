@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PictureGridCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *progressPic;
 
 @end
