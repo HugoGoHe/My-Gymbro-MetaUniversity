@@ -25,6 +25,4 @@
     [newWorkout saveInBackgroundWithBlock:completion];
 }
 
-
-
 @end

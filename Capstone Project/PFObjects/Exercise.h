@@ -23,8 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(void) newExercise: (NSString *_Nullable)name withWeight:(float)weight withSet1:(int)set1 withSet2:(int)set2 withSet3:(int)set3 withSet4:(int)set4 withSet5:(int)set5 withWorkout:(Workout *_Nullable) workout withCompletion:(PFBooleanResultBlock  _Nullable)completion;
 
-
-
 @end
 
 NS_ASSUME_NONNULL_END
