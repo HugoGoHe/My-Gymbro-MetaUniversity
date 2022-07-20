@@ -8,6 +8,7 @@
 #import "CurrentWorkoutViewController.h"
 #import "Workout.h"
 #import "Exercise.h"
+#import "ExerciseCell.h"
 
 
 @interface CurrentWorkoutViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -95,7 +96,16 @@
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
+    ExerciseCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Exercise Cell" forIndexPath:indexPath];
+    Exercise *exercise = self.arrayOfExercises[indexPath.row];
+    cell.nameLabel.text = exercise.name;
+    cell.weightLabel.text = [@(exercise.weight) stringValue];
+    cell.set1Label.text = [@(exercise.set1) stringValue];
+    cell.set2Label.text = [@(exercise.set2) stringValue];
+    cell.set3Label.text = [@(exercise.set3) stringValue];
+    cell.set4Label.text = [@(exercise.set4) stringValue];
+    cell.set5Label.text = [@(exercise.set5) stringValue];
+    return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
