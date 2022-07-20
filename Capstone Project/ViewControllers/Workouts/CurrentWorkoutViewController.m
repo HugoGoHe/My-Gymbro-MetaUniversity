@@ -7,8 +7,13 @@
 
 #import "CurrentWorkoutViewController.h"
 #import "Workout.h"
+#import "Exercise.h"
 
-@interface CurrentWorkoutViewController ()
+
+@interface CurrentWorkoutViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property(strong, nonatomic) NSMutableArray *arrayOfExercises;
+@property(nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -20,6 +25,18 @@
         self.name.text = self.selectedWorkout.name;
         self.date.date = self.selectedWorkout.date;
     }
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    self.arrayOfExercises = [[NSMutableArray alloc] init];
+    [self getExercises];
+    
+    //Initialize a UIRefreshControl
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getExercises) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
 }
 
 - (IBAction)didTapCancel:(id)sender {
@@ -46,5 +63,45 @@
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(void)getExercises{
+    //Performing query to get the exercises of the workout from newest to oldest
+    PFQuery *exerciseQuery = [Exercise query];
+    [exerciseQuery whereKey:@"workout" equalTo:self.selectedWorkout];
+    [exerciseQuery orderByDescending:@"createdAt"];
+    [exerciseQuery findObjectsInBackgroundWithBlock:^(NSArray<Exercise *> * _Nullable exercises, NSError * _Nullable error) {
+        if (exercises) {
+            //Storing the data in an array and reloading the tableView
+            self.arrayOfExercises = (NSMutableArray *)exercises;
+            [self.tableView reloadData];
+        }
+        else {
+            // handle error
+            NSLog(@"%@", error.localizedDescription);
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Exercises"
+                                                                           message:@"The internet connection appears to be offline."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfExercises.count;
+
+}
+
 @end
 
