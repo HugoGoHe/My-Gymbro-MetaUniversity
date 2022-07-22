@@ -63,6 +63,14 @@
     
     
 }
+//Table view is hidden when the user finishes editing
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    self.autocompleteTableView.hidden = YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.autocompleteTableView.hidden = NO;
+    [self.autocompleteTableView reloadData];
+}
 
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
@@ -80,6 +88,7 @@ replacementString:(NSString *)string {
     
     // Put anything that starts with this substring into the autocompleteUrls array
     // The items in this array is what will show up in the table view
+    
     [self.autocompleteExercises removeAllObjects];
     for(NSString *exercise in self.listOfExercises) {
         NSRange substringRange = [exercise rangeOfString:substring];
@@ -138,7 +147,12 @@ replacementString:(NSString *)string {
     else if ([self.weightTextField.text floatValue] <= 0){
         self.errorLabel.text = @"The weight is not valid";
     }
+    //Checking if the exercise is in the list of available exercise
+    else if (![self.listOfExercises containsObject:self.exerciseTextField.text]){
+        self.errorLabel.text = @"Exercise not valid";
+    }
     else{
+        self.errorLabel.text =@"";
         //Getting the array of the sets
         NSArray *repsPerSet = [self.repsTextField.text componentsSeparatedByString:@"/"];
         //Checking if sets are valid
@@ -229,6 +243,13 @@ replacementString:(NSString *)string {
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView reloadData];
         }
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.autocompleteTableView){
+        tableView.hidden = YES;
+        self.exerciseTextField.text = [self.autocompleteExercises objectAtIndex:indexPath.row];
     }
 }
 
