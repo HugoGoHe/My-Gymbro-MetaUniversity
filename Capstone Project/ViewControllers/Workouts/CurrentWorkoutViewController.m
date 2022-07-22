@@ -9,15 +9,20 @@
 #import "Workout.h"
 #import "Exercise.h"
 #import "ExerciseCell.h"
+#import "ExerciseListCell.h"
 
 
-@interface CurrentWorkoutViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface CurrentWorkoutViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property(strong, nonatomic) NSMutableArray *arrayOfExercises;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITextField *weightTextField;
 @property (weak, nonatomic) IBOutlet UITextField *repsTextField;
 
+@property (weak, nonatomic) IBOutlet UITableView *autocompleteTableView;
+@property (weak, nonatomic) IBOutlet UITextField *exerciseTextField;
+
+@property(strong, nonatomic) NSMutableArray *listOfExercises;
+@property(strong, nonatomic) NSMutableArray *autocompleteExercises;
 @end
 
 @implementation CurrentWorkoutViewController
@@ -26,6 +31,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.exerciseTextField.delegate = self;
     
     self.arrayOfExercises = [[NSMutableArray alloc] init];
     
@@ -41,6 +47,47 @@
         [self.selectedWorkout saveInBackground];
     }
     [self getExercises];
+    
+    NSArray *availableExercises = @[@"leg press", @"leg extensions", @"leg curls"];
+    self.listOfExercises = [[NSMutableArray alloc] init];
+    self.autocompleteExercises = [[NSMutableArray alloc] init];
+
+    self.listOfExercises = [availableExercises mutableCopy];;
+    self.autocompleteExercises = [self.listOfExercises mutableCopy];
+    
+    self.autocompleteTableView.delegate = self;
+    self.autocompleteTableView.dataSource = self;
+    self.autocompleteTableView.scrollEnabled = YES;
+    self.autocompleteTableView.hidden = YES;
+    [self.view addSubview:self.autocompleteTableView];
+    
+    
+}
+
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    self.autocompleteTableView.hidden = NO;
+    
+    NSString *substring = [NSString stringWithString:textField.text];
+    substring = [substring
+                 stringByReplacingCharactersInRange:range withString:string];
+    [self searchAutocompleteEntriesWithSubstring:substring];
+    return YES;
+}
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    
+    // Put anything that starts with this substring into the autocompleteUrls array
+    // The items in this array is what will show up in the table view
+    [self.autocompleteExercises removeAllObjects];
+    for(NSString *exercise in self.listOfExercises) {
+        NSRange substringRange = [exercise rangeOfString:substring];
+        if (substringRange.location == 0) {
+            [self.autocompleteExercises addObject:exercise];
+        }
+    }
+    [self.autocompleteTableView reloadData];
 }
 
 - (IBAction)didTapSave:(id)sender {
@@ -62,7 +109,7 @@
     [exerciseQuery orderByDescending:@"createdAt"];
     [exerciseQuery findObjectsInBackgroundWithBlock:^(NSArray<Exercise *> * _Nullable exercises, NSError * _Nullable error) {
         NSLog(@"%@", exercises);
-        if (exercises) {
+        if (exercises && exercises.count > 0) { //if I check exercises.count > 0 then this happens when it is a past workout not only a new one.
             //Storing the data in an array and reloading the tableView
             self.arrayOfExercises = (NSMutableArray *)exercises;
             [self.tableView reloadData];
@@ -85,7 +132,7 @@
 
 - (IBAction)didTapAdd:(id)sender {
     //Check for any blank fields
-    if([self.searchBar.text isEqual:@""] || [self.weightTextField.text isEqual:@""] || [self.repsTextField.text isEqual:@""]){
+    if([self.exerciseTextField.text isEqual:@""] || [self.weightTextField.text isEqual:@""] || [self.repsTextField.text isEqual:@""]){
         self.errorLabel.text = @"One or more fields are Blank";
     }
     else if ([self.weightTextField.text floatValue] <= 0){
@@ -104,12 +151,12 @@
             while(repsPerSetMut.count < 5){
                 [repsPerSetMut addObject: @"0"];
             }
-            [Exercise newExercise:self.searchBar.text withWeight:[self.weightTextField.text floatValue] withSet1:[[repsPerSetMut objectAtIndex:0] intValue] withSet2:[[repsPerSetMut objectAtIndex:1] intValue] withSet3:[[repsPerSetMut objectAtIndex:2] intValue] withSet4:[[repsPerSetMut objectAtIndex:3] intValue] withSet5:[[repsPerSetMut objectAtIndex:4] intValue] withWorkout:self.selectedWorkout withCompletion:^(BOOL succeeded, NSError * _Nullable error){
+            [Exercise newExercise:self.exerciseTextField.text withWeight:[self.weightTextField.text floatValue] withSet1:[[repsPerSetMut objectAtIndex:0] intValue] withSet2:[[repsPerSetMut objectAtIndex:1] intValue] withSet3:[[repsPerSetMut objectAtIndex:2] intValue] withSet4:[[repsPerSetMut objectAtIndex:3] intValue] withSet5:[[repsPerSetMut objectAtIndex:4] intValue] withWorkout:self.selectedWorkout withCompletion:^(BOOL succeeded, NSError * _Nullable error){
                 if(!error){
                     [self getExercises];
                 }
             }];
-            self.searchBar.text = @"";
+            self.exerciseTextField.text = @"";
             self.weightTextField.text = @"";
             self.repsTextField.text = @"";
         }
@@ -144,31 +191,48 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ExerciseCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Exercise Cell" forIndexPath:indexPath];
-    Exercise *exercise = self.arrayOfExercises[indexPath.row];
-    cell.nameLabel.text = exercise.name;
-    cell.weightLabel.text = [NSString stringWithFormat:@"%f", exercise.weight];
-    cell.set1Label.text = [NSString stringWithFormat:@"%d", exercise.set1];
-    cell.set2Label.text = [NSString stringWithFormat:@"%d", exercise.set2];
-    cell.set3Label.text = [NSString stringWithFormat:@"%d", exercise.set3];
-    cell.set4Label.text = [NSString stringWithFormat:@"%d", exercise.set4];
-    cell.set5Label.text = [NSString stringWithFormat:@"%d", exercise.set5];
-    return cell;
+
+    
+    if (tableView == self.tableView){
+        ExerciseCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Exercise Cell" forIndexPath:indexPath];
+        Exercise *exercise = self.arrayOfExercises[indexPath.row];
+        cell.nameLabel.text = exercise.name;
+        cell.weightLabel.text = [NSString stringWithFormat:@"%f", exercise.weight];
+        cell.set1Label.text = [NSString stringWithFormat:@"%d", exercise.set1];
+        cell.set2Label.text = [NSString stringWithFormat:@"%d", exercise.set2];
+        cell.set3Label.text = [NSString stringWithFormat:@"%d", exercise.set3];
+        cell.set4Label.text = [NSString stringWithFormat:@"%d", exercise.set4];
+        cell.set5Label.text = [NSString stringWithFormat:@"%d", exercise.set5];
+        return cell;
+    }else{
+        ExerciseListCell *cell = [self.autocompleteTableView dequeueReusableCellWithIdentifier:@"Exercise List Cell" forIndexPath:indexPath];
+        NSString *name = [self.autocompleteExercises objectAtIndex:indexPath.row];
+        cell.nameOfExerciseLabel.text = name;
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayOfExercises.count;
+    if (tableView == self.tableView){
+        return self.arrayOfExercises.count;
+    }else{
+        return self.autocompleteExercises.count;
+    }
 }
 
 //Deleting rows from tableView and database
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete){
-        [self.arrayOfExercises[indexPath.row] deleteInBackground];
-        [self.arrayOfExercises removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
+    if (tableView == self.tableView){
+        if (editingStyle == UITableViewCellEditingStyleDelete){
+            [self.arrayOfExercises[indexPath.row] deleteInBackground];
+            [self.arrayOfExercises removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadData];
+        }
     }
 }
+
+
 
 @end
 
