@@ -57,11 +57,11 @@
 
 -(void)getExercises{
     //Performing query to get the exercises of the workout from newest to oldest
-    
     PFQuery *exerciseQuery = [Exercise query];
     [exerciseQuery whereKey:@"workout" equalTo:self.selectedWorkout];
     [exerciseQuery orderByDescending:@"createdAt"];
     [exerciseQuery findObjectsInBackgroundWithBlock:^(NSArray<Exercise *> * _Nullable exercises, NSError * _Nullable error) {
+        NSLog(@"%@", exercises);
         if (exercises) {
             //Storing the data in an array and reloading the tableView
             self.arrayOfExercises = (NSMutableArray *)exercises;
@@ -132,7 +132,6 @@
 
 -(BOOL) isSetValid:(id) set{
     int maxNumReps = 99;
-    
     //if intValue method returns 0 means it is either 0 or not a number
     //also we dont want negative numbers
     if ([set intValue] <= 0){
@@ -148,18 +147,27 @@
     ExerciseCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Exercise Cell" forIndexPath:indexPath];
     Exercise *exercise = self.arrayOfExercises[indexPath.row];
     cell.nameLabel.text = exercise.name;
-    cell.weightLabel.text = [@(exercise.weight) stringValue];
-    cell.set1Label.text = [@(exercise.set1) stringValue];
-    cell.set2Label.text = [@(exercise.set2) stringValue];
-    cell.set3Label.text = [@(exercise.set3) stringValue];
-    cell.set4Label.text = [@(exercise.set4) stringValue];
-    cell.set5Label.text = [@(exercise.set5) stringValue];
+    cell.weightLabel.text = [NSString stringWithFormat:@"%f", exercise.weight];
+    cell.set1Label.text = [NSString stringWithFormat:@"%d", exercise.set1];
+    cell.set2Label.text = [NSString stringWithFormat:@"%d", exercise.set2];
+    cell.set3Label.text = [NSString stringWithFormat:@"%d", exercise.set3];
+    cell.set4Label.text = [NSString stringWithFormat:@"%d", exercise.set4];
+    cell.set5Label.text = [NSString stringWithFormat:@"%d", exercise.set5];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrayOfExercises.count;
+}
 
+//Deleting rows from tableView and database
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        [self.arrayOfExercises[indexPath.row] deleteInBackground];
+        [self.arrayOfExercises removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
+    }
 }
 
 @end

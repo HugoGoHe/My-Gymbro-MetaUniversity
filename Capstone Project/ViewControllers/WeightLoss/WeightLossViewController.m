@@ -96,7 +96,7 @@
     ProgressPic *progressPic = self.arrayOfPosts[indexPath.row];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:progressPic.image.url]];
     cell.progressPic.image = [UIImage imageWithData:imageData];
-    return cell;  
+    return cell;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
