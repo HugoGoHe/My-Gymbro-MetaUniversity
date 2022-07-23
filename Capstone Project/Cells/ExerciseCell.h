@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
-@property (weak, nonatomic) IBOutlet UILabel *set1Label;
-@property (weak, nonatomic) IBOutlet UILabel *set2Label;
-@property (weak, nonatomic) IBOutlet UILabel *set3Label;
-@property (weak, nonatomic) IBOutlet UILabel *set4Label;
-@property (weak, nonatomic) IBOutlet UILabel *set5Label;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseSet1Label;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseSet2Label;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseSet3Label;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseSet4Label;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseSet5Label;
 
 @end
 

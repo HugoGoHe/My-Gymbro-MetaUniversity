@@ -9,14 +9,14 @@
 
 @implementation Exercise
 
-@dynamic name;
-@dynamic weight;
-@dynamic set1;
-@dynamic set2;
-@dynamic set3;
-@dynamic set4;
-@dynamic set5;
-@dynamic workout;
+@dynamic  name;
+@synthesize weight;
+@synthesize exerciseSet1;
+@synthesize exerciseSet2;
+@synthesize exerciseSet3;
+@synthesize exerciseSet4;
+@synthesize exerciseSet5;
+@synthesize workout;
 
 
 + (nonnull NSString *)parseClassName {
@@ -27,11 +27,11 @@
     Exercise *newExercise = [Exercise new];
     newExercise.name = name;
     newExercise.weight = weight;
-    newExercise.set1 = set1;
-    newExercise.set2 = set2;
-    newExercise.set3 = set3;
-    newExercise.set4 = set4;
-    newExercise.set5 = set5;
+    newExercise.exerciseSet1 = set1;
+    newExercise.exerciseSet2 = set2;
+    newExercise.exerciseSet3 = set3;
+    newExercise.exerciseSet4 = set4;
+    newExercise.exerciseSet5 = set5;
     newExercise.workout = workout;
     [newExercise saveInBackgroundWithBlock:completion];
 }

@@ -17,10 +17,8 @@
 @property(strong, nonatomic) NSMutableArray *arrayOfExercises;
 @property (weak, nonatomic) IBOutlet UITextField *weightTextField;
 @property (weak, nonatomic) IBOutlet UITextField *repsTextField;
-
 @property (weak, nonatomic) IBOutlet UITableView *autocompleteTableView;
 @property (weak, nonatomic) IBOutlet UITextField *exerciseTextField;
-
 @property(strong, nonatomic) NSMutableArray *listOfExercises;
 @property(strong, nonatomic) NSMutableArray *autocompleteExercises;
 @end
@@ -33,12 +31,17 @@
     self.tableView.delegate = self;
     self.exerciseTextField.delegate = self;
     
-    self.arrayOfExercises = [[NSMutableArray alloc] init];
+    self.autocompleteTableView.delegate = self;
+    self.autocompleteTableView.dataSource = self;
+    self.autocompleteTableView.scrollEnabled = YES;
+    self.autocompleteTableView.hidden = YES;
+    [self.view addSubview:self.autocompleteTableView];
     
+    self.arrayOfExercises = [[NSMutableArray alloc] init];
     if(self.exists){
         self.name.text = self.selectedWorkout.name;
         self.date.date = self.selectedWorkout.date;
-    }else{
+    } else{
         //If the workout does not exists, we need to create it in the database
         self.selectedWorkout = [Workout new];
         self.selectedWorkout.author = [PFUser currentUser];
@@ -51,32 +54,18 @@
     NSArray *availableExercises = @[@"leg press", @"leg extensions", @"leg curls"];
     self.listOfExercises = [[NSMutableArray alloc] init];
     self.autocompleteExercises = [[NSMutableArray alloc] init];
-
     self.listOfExercises = [availableExercises mutableCopy];;
     self.autocompleteExercises = [self.listOfExercises mutableCopy];
-    
-    self.autocompleteTableView.delegate = self;
-    self.autocompleteTableView.dataSource = self;
-    self.autocompleteTableView.scrollEnabled = YES;
-    self.autocompleteTableView.hidden = YES;
-    [self.view addSubview:self.autocompleteTableView];
-    
-    
 }
 //Table view is hidden when the user finishes editing
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     self.autocompleteTableView.hidden = YES;
-}
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    self.autocompleteTableView.hidden = NO;
-    [self.autocompleteTableView reloadData];
 }
 
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string {
     self.autocompleteTableView.hidden = NO;
-    
     NSString *substring = [NSString stringWithString:textField.text];
     substring = [substring
                  stringByReplacingCharactersInRange:range withString:string];
@@ -85,14 +74,12 @@ replacementString:(NSString *)string {
 }
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
-    
     // Put anything that starts with this substring into the autocompleteUrls array
     // The items in this array is what will show up in the table view
-    
     [self.autocompleteExercises removeAllObjects];
     for(NSString *exercise in self.listOfExercises) {
         NSRange substringRange = [exercise rangeOfString:substring];
-        if (substringRange.location == 0) {
+        if (substringRange.location == 0){
             [self.autocompleteExercises addObject:exercise];
         }
     }
@@ -117,15 +104,12 @@ replacementString:(NSString *)string {
     [exerciseQuery whereKey:@"workout" equalTo:self.selectedWorkout];
     [exerciseQuery orderByDescending:@"createdAt"];
     [exerciseQuery findObjectsInBackgroundWithBlock:^(NSArray<Exercise *> * _Nullable exercises, NSError * _Nullable error) {
-        NSLog(@"%@", exercises);
         if (exercises && exercises.count > 0) { //if I check exercises.count > 0 then this happens when it is a past workout not only a new one.
             //Storing the data in an array and reloading the tableView
             self.arrayOfExercises = (NSMutableArray *)exercises;
             [self.tableView reloadData];
-        }
-        else {
+        } else {
             // handle error
-            NSLog(@"%@", error.localizedDescription);
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"There are no exercises"
                                                                            message:@"Try adding some to your workout"
                                                                     preferredStyle:UIAlertControllerStyleAlert];
@@ -165,8 +149,16 @@ replacementString:(NSString *)string {
             while(repsPerSetMut.count < 5){
                 [repsPerSetMut addObject: @"0"];
             }
-            [Exercise newExercise:self.exerciseTextField.text withWeight:[self.weightTextField.text floatValue] withSet1:[[repsPerSetMut objectAtIndex:0] intValue] withSet2:[[repsPerSetMut objectAtIndex:1] intValue] withSet3:[[repsPerSetMut objectAtIndex:2] intValue] withSet4:[[repsPerSetMut objectAtIndex:3] intValue] withSet5:[[repsPerSetMut objectAtIndex:4] intValue] withWorkout:self.selectedWorkout withCompletion:^(BOOL succeeded, NSError * _Nullable error){
-                if(!error){
+            [Exercise newExercise:self.exerciseTextField.text
+                       withWeight:[self.weightTextField.text floatValue]
+                         withSet1:[[repsPerSetMut objectAtIndex:0] intValue]
+                         withSet2:[[repsPerSetMut objectAtIndex:1] intValue]
+                         withSet3:[[repsPerSetMut objectAtIndex:2] intValue]
+                         withSet4:[[repsPerSetMut objectAtIndex:3] intValue]
+                         withSet5:[[repsPerSetMut objectAtIndex:4] intValue]
+                      withWorkout:self.selectedWorkout withCompletion:^(BOOL succeeded, NSError * _Nullable error)
+             {
+                if(!error) {
                     [self getExercises];
                 }
             }];
@@ -205,20 +197,20 @@ replacementString:(NSString *)string {
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-
-    
     if (tableView == self.tableView){
         ExerciseCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Exercise Cell" forIndexPath:indexPath];
         Exercise *exercise = self.arrayOfExercises[indexPath.row];
         cell.nameLabel.text = exercise.name;
-        cell.weightLabel.text = [NSString stringWithFormat:@"%f", exercise.weight];
-        cell.set1Label.text = [NSString stringWithFormat:@"%d", exercise.set1];
-        cell.set2Label.text = [NSString stringWithFormat:@"%d", exercise.set2];
-        cell.set3Label.text = [NSString stringWithFormat:@"%d", exercise.set3];
-        cell.set4Label.text = [NSString stringWithFormat:@"%d", exercise.set4];
-        cell.set5Label.text = [NSString stringWithFormat:@"%d", exercise.set5];
+        cell.weightLabel.text = [NSString stringWithFormat:@"%.02f", exercise.weight];
+        cell.exerciseSet1Label.text = [NSString stringWithFormat:@"%d", exercise.exerciseSet1];
+        cell.exerciseSet2Label.text = [NSString stringWithFormat:@"%d", exercise.exerciseSet2];
+        cell.exerciseSet3Label.text = [NSString stringWithFormat:@"%d", exercise.exerciseSet3];
+        cell.exerciseSet4Label.text = [NSString stringWithFormat:@"%d", exercise.exerciseSet4];
+        cell.exerciseSet5Label.text = [NSString stringWithFormat:@"%d", exercise.exerciseSet5];
         return cell;
     }else{
+        //Calling observer for the contentSize property on the autocompleteTableView
+        [self.autocompleteTableView addObserver:self forKeyPath:@"contentSize" options:0 context:NULL];
         ExerciseListCell *cell = [self.autocompleteTableView dequeueReusableCellWithIdentifier:@"Exercise List Cell" forIndexPath:indexPath];
         NSString *name = [self.autocompleteExercises objectAtIndex:indexPath.row];
         cell.nameOfExerciseLabel.text = name;
@@ -230,6 +222,9 @@ replacementString:(NSString *)string {
     if (tableView == self.tableView){
         return self.arrayOfExercises.count;
     }else{
+        if(self.autocompleteExercises.count == 0){
+            self.autocompleteTableView.hidden = YES;
+        }
         return self.autocompleteExercises.count;
     }
 }
@@ -253,7 +248,13 @@ replacementString:(NSString *)string {
     }
 }
 
-
+//Add an observer for the contentSize property on the table view, and adjust the frame size accordingly
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+    {
+         CGRect frame = self.autocompleteTableView.frame;
+         frame.size = self.autocompleteTableView.contentSize;
+         self.autocompleteTableView.frame = frame;
+    }
 
 @end
 

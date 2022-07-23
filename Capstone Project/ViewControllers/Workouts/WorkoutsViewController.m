@@ -26,6 +26,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.rowHeight = 50;
     
     self.arrayOfWorkouts = [[NSMutableArray alloc] init];
     [self getWorkouts];
