@@ -10,13 +10,13 @@
 @implementation Exercise
 
 @dynamic  name;
-@synthesize weight;
-@synthesize exerciseSet1;
-@synthesize exerciseSet2;
-@synthesize exerciseSet3;
-@synthesize exerciseSet4;
-@synthesize exerciseSet5;
-@synthesize workout;
+@dynamic weight;
+@dynamic exerciseSet1;
+@dynamic exerciseSet2;
+@dynamic exerciseSet3;
+@dynamic exerciseSet4;
+@dynamic exerciseSet5;
+@dynamic workout;
 
 
 + (nonnull NSString *)parseClassName {

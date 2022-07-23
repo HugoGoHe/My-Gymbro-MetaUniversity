@@ -35,6 +35,7 @@
     self.autocompleteTableView.dataSource = self;
     self.autocompleteTableView.scrollEnabled = YES;
     self.autocompleteTableView.hidden = YES;
+    self.autocompleteTableView.rowHeight = 40;
     [self.view addSubview:self.autocompleteTableView];
     
     self.arrayOfExercises = [[NSMutableArray alloc] init];
