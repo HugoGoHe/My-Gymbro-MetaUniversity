@@ -18,8 +18,11 @@
 		14314D82287CDF5A00467223 /* ProgressPic.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D81287CDF5A00467223 /* ProgressPic.m */; };
 		14314D89287DF14800467223 /* PictureGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14314D88287DF14800467223 /* PictureGridCell.m */; };
 		14380540288209C6000CA2D4 /* CurrentWorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438053F288209C6000CA2D4 /* CurrentWorkoutViewController.m */; };
+		1449EB1E288F4AA30088E347 /* Highcharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EB1D288F4AA30088E347 /* Highcharts.xcframework */; };
+		1449EB1F288F4AA30088E347 /* Highcharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EB1D288F4AA30088E347 /* Highcharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14BDE87D28809FC9008359F5 /* WorkoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BDE87C28809FC9008359F5 /* WorkoutCell.m */; };
 		14C2ECF52880995E00E1000A /* Workout.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C2ECF42880995E00E1000A /* Workout.m */; };
+		14C52B62288F4A17003A936A /* Highcharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C52B61288F4A17003A936A /* Highcharts.xcframework */; };
 		14F2CD8D28779C000046372F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8C28779C000046372F /* AppDelegate.m */; };
 		14F2CD9028779C000046372F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2CD8F28779C000046372F /* SceneDelegate.m */; };
 		14F2CD9628779C000046372F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F2CD9428779C000046372F /* Main.storyboard */; };
@@ -51,6 +54,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1449EB20288F4AA30088E347 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1449EB1F288F4AA30088E347 /* Highcharts.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0D1BB2FFC15DFA3E9B29C726 /* Pods-Capstone Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone Project.release.xcconfig"; path = "Target Support Files/Pods-Capstone Project/Pods-Capstone Project.release.xcconfig"; sourceTree = "<group>"; };
 		1413AAD1287BF28100373D1B /* WeightLossViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeightLossViewController.h; sourceTree = "<group>"; };
@@ -75,10 +92,12 @@
 		14314D88287DF14800467223 /* PictureGridCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureGridCell.m; sourceTree = "<group>"; };
 		1438053F288209C6000CA2D4 /* CurrentWorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWorkoutViewController.m; sourceTree = "<group>"; };
 		14380541288209CE000CA2D4 /* CurrentWorkoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentWorkoutViewController.h; sourceTree = "<group>"; };
+		1449EB1D288F4AA30088E347 /* Highcharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Highcharts.xcframework; path = Pods/Highcharts/XCFramework/Highcharts.xcframework; sourceTree = "<group>"; };
 		14BDE87B28809FC9008359F5 /* WorkoutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkoutCell.h; sourceTree = "<group>"; };
 		14BDE87C28809FC9008359F5 /* WorkoutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkoutCell.m; sourceTree = "<group>"; };
 		14C2ECF32880995E00E1000A /* Workout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Workout.h; sourceTree = "<group>"; };
 		14C2ECF42880995E00E1000A /* Workout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Workout.m; sourceTree = "<group>"; };
+		14C52B61288F4A17003A936A /* Highcharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Highcharts.xcframework; sourceTree = "<group>"; };
 		14F2CD8828779C000046372F /* Capstone Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F2CD8B28779C000046372F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14F2CD8C28779C000046372F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -109,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1449EB1E288F4AA30088E347 /* Highcharts.xcframework in Frameworks */,
 				E3A23BBF59202D5F95AD5E7A /* Pods_Capstone_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C52B62288F4A17003A936A /* Highcharts.xcframework in Frameworks */,
 				A86A486AA3301812A1E60C8E /* Pods_Capstone_ProjectTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +285,8 @@
 		6F4CD7531B87342CA3F31571 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1449EB1D288F4AA30088E347 /* Highcharts.xcframework */,
+				14C52B61288F4A17003A936A /* Highcharts.xcframework */,
 				16799C0AA54AFEC10FEB1803 /* Pods_Capstone_Project.framework */,
 				DB2AC4A5AE44837015CBFA03 /* Pods_Capstone_Project_Capstone_ProjectUITests.framework */,
 				18CDE43420325BCEE28A9BDD /* Pods_Capstone_ProjectTests.framework */,
@@ -296,6 +319,7 @@
 				14F2CD8528779C000046372F /* Frameworks */,
 				14F2CD8628779C000046372F /* Resources */,
 				0D8DCDE75E06949C1F6046E5 /* [CP] Embed Pods Frameworks */,
+				1449EB20288F4AA30088E347 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
