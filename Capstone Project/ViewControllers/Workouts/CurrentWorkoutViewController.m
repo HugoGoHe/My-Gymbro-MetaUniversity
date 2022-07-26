@@ -52,11 +52,11 @@
     }
     [self getExercises];
     
-    NSArray *availableExercises = @[@"leg press", @"leg extensions", @"leg curls"];
+   // NSArray *availableExercises = @[@"leg press", @"leg extensions", @"leg curls"];
     self.listOfExercises = [[NSMutableArray alloc] init];
     self.autocompleteExercises = [[NSMutableArray alloc] init];
-    self.listOfExercises = [availableExercises mutableCopy];;
-    self.autocompleteExercises = [self.listOfExercises mutableCopy];
+ //   self.listOfExercises = [availableExercises mutableCopy];;
+  //  self.autocompleteExercises = [self.listOfExercises mutableCopy];
 }
 //Table view is hidden when the user finishes editing
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -68,9 +68,28 @@ shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string {
     self.autocompleteTableView.hidden = NO;
     NSString *substring = [NSString stringWithString:textField.text];
-    substring = [substring
-                 stringByReplacingCharactersInRange:range withString:string];
-    [self searchAutocompleteEntriesWithSubstring:substring];
+    
+    //Performs a query only if it is the first letter typed
+    if(substring.length == 0){
+        //Fetch Data
+        PFQuery *availableExercisesQuery = [PFQuery queryWithClassName:@"AvailableExercise"];
+        [availableExercisesQuery whereKey:@"name" hasPrefix:substring];
+        [availableExercisesQuery findObjectsInBackgroundWithBlock:^(NSArray *availableExercises, NSError *error) {
+            if (!error) {
+                self.listOfExercises = [availableExercises valueForKey:@"name"];
+                self.autocompleteExercises = [self.listOfExercises mutableCopy];
+                [self.autocompleteTableView reloadData];
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }else{
+        //Searches on the fetched array
+        substring = [substring
+                     stringByReplacingCharactersInRange:range withString:string];
+        [self searchAutocompleteEntriesWithSubstring:substring];
+    }
     return YES;
 }
 
