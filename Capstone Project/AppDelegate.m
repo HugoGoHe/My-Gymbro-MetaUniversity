@@ -6,6 +6,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Highcharts/Highcharts.h>
 
 
 @interface AppDelegate ()
@@ -16,7 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    //To preset the chartView and set some initial options
+    //An optional method to be called when the application starts. Speeds up subsequent chart loads.
+    [HIChartView preload];
 
     return YES;
 }
