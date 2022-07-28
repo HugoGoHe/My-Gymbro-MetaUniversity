@@ -30,16 +30,6 @@
     [self createChart:self.WeightChartView];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
     
@@ -61,17 +51,17 @@
     HITitle *title = [[HITitle alloc]init];
     title.text = @"Weight";
     
-//    HISubtitle *subtitle = [[HISubtitle alloc]init];
-//    subtitle.text = @"some subtitle";
+    HISubtitle *subtitle = [[HISubtitle alloc]init];
+    subtitle.text = @"BodyWeight";
     
     HIYAxis *yaxis = [[HIYAxis alloc]init];
     yaxis.title = [[HITitle alloc]init];
     yaxis.title.text = @"Weight";
     
     HILegend *legend = [[HILegend alloc]init];
-//    legend.layout = @"vertical";
-//    legend.align = @"right";
-//    legend.verticalAlign = @"middle";
+    legend.layout = @"vertical";
+    legend.align = @"right";
+    legend.verticalAlign = @"middle";
     
     HIPlotOptions *plotoptions = [[HIPlotOptions alloc] init];
     plotoptions.series = [[HISeries alloc] init];
@@ -86,18 +76,6 @@
     HILine *line2 = [[HILine alloc]init];
     line2.name = @"Manufacturing";
     line2.data = [NSMutableArray arrayWithObjects:@0, @0.2, @0.43, @0.62,  nil];
-//
-//    HILine *line3 = [[HILine alloc]init];
-//    line3.name = @"Sales & Distribution";
-//    line3.data = [NSMutableArray arrayWithObjects:@11744, @17722, @16005, @19771, @20185, @24377, @32147, @39387, nil];
-//
-//    HILine *line4 = [[HILine alloc]init];
-//    line4.name = @"Project Development";
-//    line4.data = [NSMutableArray arrayWithObjects:[NSNull null], [NSNull null], @7988, @12169, @15112, @22452, @34400, @34227, nil];
-//
-//    HILine *line5 = [[HILine alloc]init];
-//    line5.name = @"Other";
-//    line5.data = [NSMutableArray arrayWithObjects:@12908, @5948, @8105, @11248, @8989, @11816, @18274, @18111, nil];
     
     
     HIResponsive *responsive = [[HIResponsive alloc] init];
@@ -116,7 +94,7 @@
     responsive.rules = [NSMutableArray arrayWithObjects:rules1, nil];
     
     options.title = title;
-//    options.subtitle = subtitle;
+    options.subtitle = subtitle;
     options.yAxis = [NSMutableArray arrayWithObject:yaxis];
     options.legend = legend;
     options.plotOptions = plotoptions;

@@ -43,7 +43,6 @@ static const int MAXNUMREPS = 99;
     self.suggestedTextTableView.rowHeight = 40;
     [self.view addSubview:self.suggestedTextTableView];
     
-    self.arrayOfExercises = [[NSMutableArray alloc] init];
     if(self.exists){
         self.name.text = self.selectedWorkout.name;
         self.date.date = self.selectedWorkout.date;
