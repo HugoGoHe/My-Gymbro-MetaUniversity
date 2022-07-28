@@ -232,10 +232,10 @@ replacementString:(NSString *)string {
         cell.nameLabel.text = exercise.name;
         cell.weightLabel.text = [NSString stringWithFormat:@"%.02f", exercise.weight];
         cell.exerciseSet1Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:0]];
-        cell.exerciseSet2Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:0]];
-        cell.exerciseSet3Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:0]];
-        cell.exerciseSet4Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:0]];
-        cell.exerciseSet5Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:0]];
+        cell.exerciseSet2Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:1]];
+        cell.exerciseSet3Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:2]];
+        cell.exerciseSet4Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:3]];
+        cell.exerciseSet5Label.text = [NSString stringWithFormat:@"%@", [exercise.exerciseSets objectAtIndex:4]];
         return cell;
     }else{
         //Calling observer for the contentSize property on the suggestedTextTableView
