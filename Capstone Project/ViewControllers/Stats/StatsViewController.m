@@ -81,11 +81,11 @@
     
     HILine *line1 = [[HILine alloc]init];
     line1.name = @"Body weight";
-    line1.data = [NSMutableArray arrayWithObjects:@43934, @52503, @57177, @69658, @97031, @119931, @137133, @154175, nil];
+    line1.data = [NSMutableArray arrayWithObjects:@0, @0.3, @0.47, @0.603, @0.7, @0.77, nil];
     
     HILine *line2 = [[HILine alloc]init];
     line2.name = @"Manufacturing";
-    line2.data = [NSMutableArray arrayWithObjects:@43934, @52503, @57177, @69658, @97031, @119931, @137133, @154175, nil];
+    line2.data = [NSMutableArray arrayWithObjects:@0, @0.2, @0.43, @0.62,  nil];
 //
 //    HILine *line3 = [[HILine alloc]init];
 //    line3.name = @"Sales & Distribution";
