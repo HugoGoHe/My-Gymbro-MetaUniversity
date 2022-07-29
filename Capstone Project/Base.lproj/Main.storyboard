@@ -303,6 +303,13 @@
                                 <rect key="frame" x="85" y="238" width="244" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y72-fk-yK0">
+                                <rect key="frame" x="85" y="697" width="246" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EuN-aI-JHh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -333,6 +340,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="8Ft-n8-jlT" id="B9u-2f-pz1"/>
+                        <outlet property="errorLabel" destination="y72-fk-yK0" id="VUO-Wc-lkH"/>
                         <outlet property="progressPic" destination="23G-k1-5XV" id="R1H-6k-Emp"/>
                         <outlet property="weightLabel" destination="Zll-Gv-Dmk" id="KUc-PE-FpR"/>
                     </connections>
