@@ -132,7 +132,6 @@
         UINavigationController *nav = [segue destinationViewController];
         SlideshowViewController *ssvc = (SlideshowViewController *) nav.topViewController;
         ssvc.urls = self.urls;
-        NSLog(@"%@", ssvc.urls);
     }
     
 }

@@ -31,7 +31,6 @@
     [_speedSlider setUserInteractionEnabled:NO];
 
      _datasource = self.urls;
-    NSLog(@"%@", self.uiImages);
      // KASlideshow
     self.slideshow.datasource = self;
     self.slideshow.delegate = self;
@@ -40,7 +39,6 @@
     [self.slideshow setTransitionType:KASlideShowTransitionFade]; // Choose a transition type (fade or slide)
     [self.slideshow setImagesContentMode:UIViewContentModeScaleAspectFill]; // Choose a content mode for images to display
     [self.slideshow addGesture:KASlideShowGestureTap]; // Gesture to go previous/next directly on the image
-    
     
     [_slideshow setTransitionType:KASlideShowTransitionFade];
     _slideshow.gestureRecognizers = nil;
@@ -58,6 +56,8 @@
 {
     return _datasource.count;
 }
+
+#pragma mark - Actions
 
 - (IBAction)selectChangeValue:(id)sender {
     UISlider * slider = (UISlider *) sender;
