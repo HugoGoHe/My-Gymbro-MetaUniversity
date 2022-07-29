@@ -113,8 +113,9 @@ replacementString:(NSString *)string {
         }
     }
     [self.suggestedTextTableView reloadData];
-    self.suggestedTextTableView.hidden = NO;
-
+    if (self.suggestedExercises.count > 0){
+        self.suggestedTextTableView.hidden = NO;
+    }
 }
 
 - (IBAction)didTapSave:(id)sender {
