@@ -189,6 +189,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="aLf-Ax-kqW">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="aMr-GJ-gg0">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="1fJ-ID-xNk">
+                                <rect key="frame" x="20" y="5" width="201.5" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Slideshow"/>
+                                <connections>
+                                    <segue destination="24n-oq-DRG" kind="showDetail" identifier="Slideshow" id="CUo-c0-58k"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="pr7-Ge-ORS">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="LTG-dj-lzx">
                                 <rect key="frame" x="227.5" y="5" width="166.5" height="34.5"/>
@@ -210,6 +221,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y43-N1-WFS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="337.68115942028987" y="1818.75"/>
+        </scene>
+        <!--Slideshow View Controller-->
+        <scene sceneID="8pl-1S-imm">
+            <objects>
+                <viewController id="47O-VC-7V5" customClass="SlideshowViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vtJ-sh-SPc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FX8-80-NJI" customClass="KASlideShow">
+                                <rect key="frame" x="20" y="137" width="374" height="571"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHl-U4-DsF">
+                                <rect key="frame" x="174" y="716" width="67" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="▶"/>
+                                <connections>
+                                    <action selector="startStop:" destination="47O-VC-7V5" eventType="touchUpInside" id="ZQb-Xg-Ilt"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQK-jQ-SZc">
+                                <rect key="frame" x="109" y="773" width="196" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="selectChangeValue:" destination="47O-VC-7V5" eventType="valueChanged" id="NDF-KN-nxR"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lhy-3d-SBT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FsZ-pH-zh3">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="CHc-yP-Uj6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="YyU-rw-awN">
+                                <rect key="frame" x="20" y="5" width="92" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system"/>
+                                <connections>
+                                    <action selector="didTapBack:" destination="47O-VC-7V5" eventType="touchUpInside" id="hWT-h7-OoH"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="slideshow" destination="FX8-80-NJI" id="D78-LV-nA8"/>
+                        <outlet property="speedSlider" destination="KQK-jQ-SZc" id="Fw8-r9-cGp"/>
+                        <outlet property="startStopButton" destination="hHl-U4-DsF" id="rUR-13-k6u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jYs-cX-Fkl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1246.376811594203" y="2509.8214285714284"/>
         </scene>
         <!--Post Preview View Controller-->
         <scene sceneID="7TF-Mx-adg">
@@ -246,7 +313,7 @@
                                 <rect key="frame" x="20" y="5" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system" title=""/>
                                 <connections>
                                     <action selector="didTapBack:" destination="0e1-HR-485" eventType="touchUpInside" id="lTV-On-Q12"/>
                                 </connections>
@@ -582,7 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbp-I9-oNz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4957.971014492754" y="2566.0714285714284"/>
+            <point key="canvasLocation" x="5868.115942028986" y="2566.0714285714284"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="MkD-Nt-zKy">
@@ -757,7 +824,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLz-me-U2H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4047.826086956522" y="2566.7410714285711"/>
+            <point key="canvasLocation" x="4957.971014492754" y="2566.0714285714284"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="woB-tp-ZkR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="24n-oq-DRG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="eyJ-N3-JhN"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YoY-5f-AHp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="47O-VC-7V5" kind="relationship" relationship="rootViewController" id="Qq7-dD-WsX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yfT-hi-39M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="337.68115942028987" y="2509.8214285714284"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -1,26 +1,36 @@
 PODS:
   - Bolts/Tasks (1.9.1)
   - Highcharts (10.2.0)
+  - KASlideShow (3.0.0):
+    - SDWebImage (~> 3.8)
   - Parse (1.19.3):
     - Parse/Core (= 1.19.3)
   - Parse/Core (1.19.3):
     - Bolts/Tasks (= 1.9.1)
+  - SDWebImage (3.8.3):
+    - SDWebImage/Core (= 3.8.3)
+  - SDWebImage/Core (3.8.3)
 
 DEPENDENCIES:
   - Highcharts
+  - KASlideShow
   - Parse
 
 SPEC REPOS:
   trunk:
     - Bolts
     - Highcharts
+    - KASlideShow
     - Parse
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Highcharts: e47614d58e1a8f76764be57ea91f78d159978a1e
+  KASlideShow: d737c734ee603ed4fc7de09876d5193192e74ee4
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
+  SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
 
-PODFILE CHECKSUM: 516dc0ac41894efdc4f8fcf7f597a77ce807f376
+PODFILE CHECKSUM: 0d21e50d108bd2742007c4931e667ae64cfa983b
 
 COCOAPODS: 1.11.3

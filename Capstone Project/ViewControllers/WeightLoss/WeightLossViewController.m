@@ -10,6 +10,7 @@
 #import "Parse/Parse.h"
 #import "ProgressPic.h"
 #import "PictureGridCell.h"
+#import "SlideshowViewController.h"
 
 @interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PostPreviewViewControllerDelegate>
 
@@ -18,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
-
+@property (strong, nonatomic) NSMutableArray <NSURL *> *urls;
 @end
 
 @implementation WeightLossViewController
@@ -35,6 +36,8 @@
     [self.refreshControl addTarget:self action:@selector(getProgressPics) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
+    
+    self.urls = [[NSMutableArray alloc] init];
 }
 
 - (IBAction)didTapNewPost:(id)sender {
@@ -95,6 +98,9 @@
     PictureGridCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Picture Grid Cell" forIndexPath:indexPath];
     ProgressPic *progressPic = self.arrayOfPosts[indexPath.row];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:progressPic.image.url]];
+    //Array for the slideshow
+    [self.urls addObject:[NSURL URLWithString:progressPic.image.url]];
+    
     cell.progressPic.image = [UIImage imageWithData:imageData];
     return cell;
 }
@@ -121,5 +127,13 @@
         ppvc.selectedImage = self.selectedImage;
         ppvc.delegate = self;
     }
+    
+    if([[segue identifier] isEqualToString: @"Slideshow"]){
+        UINavigationController *nav = [segue destinationViewController];
+        SlideshowViewController *ssvc = (SlideshowViewController *) nav.topViewController;
+        ssvc.urls = self.urls;
+        NSLog(@"%@", ssvc.urls);
+    }
+    
 }
 @end
