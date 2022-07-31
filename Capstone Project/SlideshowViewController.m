@@ -61,7 +61,7 @@
 
 - (IBAction)selectChangeValue:(id)sender {
     UISlider * slider = (UISlider *) sender;
-    [_slideshow setDelay: 11 - @(slider.value).floatValue]; // Delay between transitions
+    [_slideshow setDelay: 4 - @(slider.value).floatValue]; // Delay between transitions
 }
 
 - (IBAction)startStop:(id)sender {
