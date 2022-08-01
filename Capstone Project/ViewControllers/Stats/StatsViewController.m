@@ -10,7 +10,7 @@
 #import "Highcharts/Highcharts.h"
 #import "Parse/Parse.h"
 #import "ProgressPic.h"
-#import ""
+#import "Exercise.h"
 
 @interface StatsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -24,8 +24,8 @@
 
 //Weight lifted in exercises
 @property (strong, nonatomic) NSArray *availableExercises;
-
-
+@property (strong, nonatomic) NSArray *userExercises;
+@property (strong, nonatomic) NSMutableArray *weightsOfExercises;
 
 
 
@@ -52,6 +52,10 @@
     self.dates = [[NSMutableArray alloc] init];
     self.weights = [[NSMutableArray alloc] init];
     self.formatedDates = [[NSMutableArray alloc] init];
+    
+    self.availableExercises = [[NSArray alloc] init];
+    self.userExercises = [[NSArray alloc] init];
+    self.weightsOfExercises =[[NSMutableArray alloc] init];
 
     [self getData];
 
@@ -84,33 +88,64 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    [self.refreshControl endRefreshing];
     
     //Weight lifted in different exercises
     
+    //Getting array of available exercises
     PFQuery *availableExercisesQuery = [PFQuery queryWithClassName:@"AvailableExercise"];
     [availableExercisesQuery findObjectsInBackgroundWithBlock:^(NSArray *availableExercises, NSError *error) {
         if (!error) {
-            self.availableExercises = availableExercises;
+            self.availableExercises = [availableExercises valueForKey:@"name"];
             }
         else{
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
+    
+    PFQuery *userExercises = [Exercise query];
+    [userExercises whereKey:@"username" equalTo:[PFUser currentUser]];
+    [userExercises orderByAscending:@"postedAt"];
+    [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
+        if (!error) {
+            self.userExercises = userExercises;
+            
+            for (int i = 0; i < self.availableExercises.count; i++) {
+                NSMutableArray *weightsOfExercise = [[NSMutableArray alloc] init];
+                Exercise *exercise = [[Exercise alloc] init];
+                for (int j = 0; j < self.userExercises.count; j++){
+                    exercise = [self.userExercises objectAtIndex:j];
+                    
+                    if (exercise.name == self.availableExercises[i]) {
+                        [weightsOfExercise addObject: [NSNumber numberWithFloat:exercise.weight]];
+                    }
+                }
+                [self.weightsOfExercises addObject:weightsOfExercise];
+            }
+            
+            [self.tableView reloadData];
+            }
+        else{
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    [self.refreshControl endRefreshing];
+
 }
-    PFQuery *userExercises = []
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
     
-    [self basicLineChart: cell.cellView];
+    [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.row] withData:self.weightsOfExercises[indexPath.row]];
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.weightsOfExercises.count;
 }
 
 #pragma mark - Charts
@@ -181,83 +216,9 @@
     
     
     HISpline *spline1 = [[HISpline alloc]init];
-    spline1.name = @"Time";
+    spline1.name = @"Bodyweight";
     spline1.data = arrayOfPoints;
     
-    //     spline1.data = @[
-    //                        @[
-    //                            @25315200000,
-    //                            @0
-    //                            ],
-    //                        @[
-    //                            @26524800000,
-    //                            @0.28
-    //                            ],
-    //                        @[
-    //                            @26956800000,
-    //                            @0.25
-    //                            ],
-    //                        @[
-    //                            @28512000000,
-    //                            @0.2
-    //                            ],
-    //                        @[
-    //                            @28944000000,
-    //                            @0.28
-    //                            ],
-    //                        @[
-    //                            @31017600000,
-    //                            @0.28
-    //                            ],
-    //                        @[
-    //                            @31276800000,
-    //                            @0.47
-    //                            ],
-    //                        @[
-    //                            @32400000000,
-    //                            @0.79
-    //                            ],
-    //                        @[
-    //                            @33696000000,
-    //                            @0.72
-    //                            ],
-    //                        @[
-    //                            @34387200000,
-    //                            @1.02
-    //                            ],
-    //                        @[
-    //                            @35078400000,
-    //                            @1.12
-    //                            ],
-    //                        @[
-    //                            @36288000000,
-    //                            @1.2
-    //                            ],
-    //                        @[
-    //                            @37497600000,
-    //                            @1.18
-    //                            ],
-    //                        @[
-    //                            @40176000000,
-    //                            @1.19
-    //                            ],
-    //                        @[
-    //                            @41904000000,
-    //                            @1.85
-    //                            ],
-    //                        @[
-    //                            @42249600000,
-    //                            @2.22
-    //                            ],
-    //                        @[
-    //                            @43459200000,
-    //                            @1.15
-    //                            ],
-    //                        @[
-    //                            @44755200000,
-    //                            @0
-    //                            ]
-    //                        ];
     NSLog(@"%@", spline1);
     
     options.chart = chart;
@@ -275,17 +236,17 @@
     
 }
 
-- (void)basicLineChart:(UIView *) cellView{
+- (void)basicLineChart:(UIView *) cellView ofExercise:(NSString *)nameOfExercise withData:(NSMutableArray *)weights{
     HIChartView *chartView = [[HIChartView alloc] initWithFrame:cellView.bounds];
     chartView.theme = @"brand-light";
     
     HIOptions *options = [[HIOptions alloc]init];
     
     HITitle *title = [[HITitle alloc]init];
-    title.text = @"Weight";
+    title.text = nameOfExercise;
     
     HISubtitle *subtitle = [[HISubtitle alloc]init];
-    subtitle.text = @"BodyWeight";
+    subtitle.text = @"Weight progression";
     
     HIYAxis *yaxis = [[HIYAxis alloc]init];
     yaxis.title = [[HITitle alloc]init];
@@ -300,11 +261,11 @@
     plotoptions.series = [[HISeries alloc] init];
     plotoptions.series.label = [[HILabel alloc] init];
     plotoptions.series.label.connectorAllowed = [[NSNumber alloc] initWithBool:false];
-    plotoptions.series.pointStart = @0;
+    plotoptions.series.pointStart = @1;
     
     HILine *line1 = [[HILine alloc]init];
-    line1.name = @"Body weight";
-    line1.data = self.weights;
+    line1.name = @"Weight lifted";
+    line1.data = weights;
     NSLog(@"%@", line1.data);
     
     HILine *line2 = [[HILine alloc]init];
@@ -325,8 +286,9 @@
         }
         
     };
-    responsive.rules = [NSMutableArray arrayWithObjects:rules1, nil];
     
+    responsive.rules = [NSMutableArray arrayWithObjects:rules1, nil];
+
     options.title = title;
     options.subtitle = subtitle;
     options.yAxis = [NSMutableArray arrayWithObject:yaxis];
@@ -341,5 +303,5 @@
 }
 
 
-
 @end
+

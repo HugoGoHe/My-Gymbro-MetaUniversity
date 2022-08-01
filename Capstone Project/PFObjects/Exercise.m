@@ -9,10 +9,12 @@
 
 @implementation Exercise
 
-@dynamic  name;
+@dynamic name;
 @dynamic weight;
 @dynamic exerciseSets;
 @dynamic workout;
+@dynamic username;
+@dynamic postedAt;
 
 
 + (nonnull NSString *)parseClassName {
@@ -25,6 +27,8 @@
     newExercise.weight = weight;
     newExercise.exerciseSets = [NSArray arrayWithObjects:set1,set2,set3,set4,set5, nil];
     newExercise.workout = workout;
+    newExercise.username = [PFUser currentUser];
+    newExercise.postedAt = workout.createdAt;
     [newExercise saveInBackgroundWithBlock:completion];
 }
 
