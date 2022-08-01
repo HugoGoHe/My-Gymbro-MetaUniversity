@@ -31,6 +31,9 @@
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
                 self.view.window.rootViewController = tabBarController;
+                //So it goes to the second item of the tab bar first
+                [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
+               
             }
         }];
 }

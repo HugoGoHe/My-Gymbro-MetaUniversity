@@ -34,7 +34,10 @@
     //User can stay logged in
     if (PFUser.currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
-    }
+        UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+        self.window.rootViewController = tabBarController;
+        //So it goes to the second item of the tab bar first
+        [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
+            }
 }
 @end

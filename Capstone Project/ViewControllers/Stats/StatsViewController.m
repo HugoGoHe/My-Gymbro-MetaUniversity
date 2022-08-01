@@ -82,8 +82,6 @@
             }
        //     NSLog(@"%@", self.formatedDates);
             [self irregularIntervalsChart:self.WeightChartView];
-            [self.tableView reloadData];
-
         }else{
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
