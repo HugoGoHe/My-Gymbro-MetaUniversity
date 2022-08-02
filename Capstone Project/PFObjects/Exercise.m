@@ -28,7 +28,7 @@
     newExercise.exerciseSets = [NSArray arrayWithObjects:set1,set2,set3,set4,set5, nil];
     newExercise.workout = workout;
     newExercise.username = [PFUser currentUser];
-    newExercise.postedAt = workout.createdAt;
+    newExercise.postedAt = workout.date;
     [newExercise saveInBackgroundWithBlock:completion];
 }
 

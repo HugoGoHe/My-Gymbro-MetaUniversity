@@ -11,6 +11,7 @@
 #import "Parse/Parse.h"
 #import "ProgressPic.h"
 #import "Exercise.h"
+#import "math.h"
 
 @interface StatsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -26,8 +27,6 @@
 @property (strong, nonatomic) NSArray *availableExercises;
 @property (strong, nonatomic) NSArray *userExercises;
 @property (strong, nonatomic) NSMutableArray *weightsOfExercises;
-
-
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -72,16 +71,14 @@
             //Checking postedAt column for testing, that way I can modify the date of the post
             //instead of createdAt column
             self.dates = [progressPics valueForKey:@"postedAt"];
-            NSLog(@"%@", self.dates);
             self.weights = [progressPics valueForKey:@"weight"];
-            NSLog(@"%@", self.weights);
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
             [dateFormatter setDateFormat:@"MM/dd/yyyy"];
             for (int i = 0; i < self.dates.count; i++) {
                 [self.formatedDates addObject:[dateFormatter stringFromDate:self.dates[i]]];
             }
        //     NSLog(@"%@", self.formatedDates);
-            [self irregularIntervalsChart:self.WeightChartView];
+//            [self irregularIntervalsChart:self.WeightChartView];
         }else{
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
@@ -94,40 +91,47 @@
     [availableExercisesQuery findObjectsInBackgroundWithBlock:^(NSArray *availableExercises, NSError *error) {
         if (!error) {
             self.availableExercises = [availableExercises valueForKey:@"name"];
-            }
-        else{
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-    
-    
-    PFQuery *userExercises = [Exercise query];
-    [userExercises whereKey:@"username" equalTo:[PFUser currentUser]];
-    [userExercises orderByAscending:@"postedAt"];
-    [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
-        if (!error) {
-            self.userExercises = userExercises;
             
-            for (int i = 0; i < self.availableExercises.count; i++) {
-                NSMutableArray *weightsOfExercise = [[NSMutableArray alloc] init];
-                Exercise *exercise = [[Exercise alloc] init];
-                for (int j = 0; j < self.userExercises.count; j++){
-                    exercise = [self.userExercises objectAtIndex:j];
+            PFQuery *userExercises = [Exercise query];
+            [userExercises whereKey:@"username" equalTo:[PFUser currentUser]];
+            [userExercises orderByAscending:@"postedAt"];
+            [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
+                if (!error) {
+                    self.userExercises = userExercises;
                     
-                    if (exercise.name == self.availableExercises[i]) {
-                        [weightsOfExercise addObject: [NSNumber numberWithFloat:exercise.weight]];
+                    for (int i = 0; i < self.availableExercises.count; i++) {
+                  //      NSLog(@"%@", self.availableExercises[i]);
+                        NSMutableArray *weightsOfExercise = [[NSMutableArray alloc] init];
+                        Exercise *exercise = [[Exercise alloc] init];
+                        for (int j = 0; j < self.userExercises.count; j++){
+                            exercise = [self.userExercises objectAtIndex:j];
+                            
+                            if ([exercise.name isEqualToString: self.availableExercises[i]]) {
+                                [weightsOfExercise addObject: [NSNumber numberWithFloat:exercise.weight]];
+                            }
+                        }
+                        [self.weightsOfExercises addObject:weightsOfExercise];
+                        NSLog(@"weights for %@: %@", exercise.name, self.weightsOfExercises);
                     }
+                    
+             //       NSLog(@"%@", self.weightsOfExercises);
+                    
+
+                    [self.tableView reloadData];
+                    [self irregularIntervalsChart:self.WeightChartView];
+
+                    }
+                else{
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
-                [self.weightsOfExercises addObject:weightsOfExercise];
-            }
-            
-            [self.tableView reloadData];
+            }];
             }
         else{
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
+     //   NSLog(@"%@", self.availableExercises);
     }];
     
     [self.refreshControl endRefreshing];
@@ -138,6 +142,9 @@
     ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
     
     [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.row] withData:self.weightsOfExercises[indexPath.row]];
+    NSLog(@"%@", self.availableExercises[indexPath.row] );
+    NSLog(@"%@", self.weightsOfExercises[indexPath.row] );
+
     
     return cell;
 }
@@ -209,7 +216,7 @@
         [point addObject:[self.weights objectAtIndex:i]];
         
         [arrayOfPoints addObject:point];
-        NSLog(@"%@", arrayOfPoints);
+    //   NSLog(@"%@", arrayOfPoints);
     }
     
     
@@ -217,7 +224,6 @@
     spline1.name = @"Bodyweight";
     spline1.data = arrayOfPoints;
     
-    NSLog(@"%@", spline1);
     
     options.chart = chart;
     options.title = title;
@@ -264,11 +270,11 @@
     HILine *line1 = [[HILine alloc]init];
     line1.name = @"Weight lifted";
     line1.data = weights;
-    NSLog(@"%@", line1.data);
     
     HILine *line2 = [[HILine alloc]init];
-    line2.name = @"Manufacturing";
-    line2.data = [NSMutableArray arrayWithObjects:@0, @0.2, @0.43, @0.62,  nil];
+    line2.name = @"Trendline";
+    line2.data = [self logarithmicRegression:weights];
+ //   line2.data = [NSMutableArray arrayWithObjects:@0, @0.2, @0.43, @0.62,  nil];
     
     
     HIResponsive *responsive = [[HIResponsive alloc] init];
@@ -282,7 +288,6 @@
             @"align": @"center",
             @"verticalAlign": @"bottom"
         }
-        
     };
     
     responsive.rules = [NSMutableArray arrayWithObjects:rules1, nil];
@@ -299,6 +304,55 @@
     
     [cellView addSubview:chartView];
 }
+
+
+-(NSMutableArray *)logarithmicRegression:(NSMutableArray *)Y{
+    // Y = A + BlnX
+    // Y = A + BX'
+    NSMutableArray *X = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i<Y.count; i++){
+        [X addObject:[NSNumber numberWithInt:i + 1]];
+    }
+    
+    double SumatoryX = 0;
+    double SumatoryPrimeX = 0;
+    double SumatoryPrimeXsquared = 0;
+    double SumatoryY = 0;
+    double SumatoryPrimeXTimesY = 0;
+
+    for(int i=0; i < X.count; i++) {
+        
+        SumatoryX = [X[i] doubleValue];
+        SumatoryPrimeX += log([X[i] doubleValue]);
+        SumatoryPrimeXsquared +=pow(log([X[i] doubleValue]), 2);
+        SumatoryY += [Y[i] doubleValue];
+        SumatoryPrimeXTimesY += log([X[i] doubleValue]) * [Y[i] doubleValue];
+        
+    }
+    
+    int n = (int) X.count;
+    double B =(n * SumatoryPrimeXTimesY - SumatoryPrimeX * SumatoryY)/(n * SumatoryPrimeXsquared - pow(SumatoryPrimeX,2));
+    
+    // A = Yprom - B * XPrimeprom
+    
+    double A = (SumatoryY/X.count) - B * (SumatoryPrimeX /X.count);
+    double prediction = 0;
+    
+    NSMutableArray *logarithmicTrendline = [[NSMutableArray alloc] init];
+    for(int i = 0; i < X.count; i++){
+        
+        prediction = A + B * log([X[i] doubleValue]);
+        [logarithmicTrendline addObject:[NSNumber numberWithDouble:prediction]];
+    }
+//    NSLog(@"%f", B);
+//    NSLog(@"%f", A);
+//
+//    NSLog(@"%@", logarithmicTrendline);
+    return logarithmicTrendline;
+}
+
+
 
 
 @end
