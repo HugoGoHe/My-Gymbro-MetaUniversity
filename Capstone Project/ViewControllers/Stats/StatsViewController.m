@@ -319,29 +319,25 @@
 -(NSMutableArray *)logarithmicRegression:(NSMutableArray *)Y{
     // Y = A + BlnX
     // Y = A + BX'
-    NSMutableArray *X = [[NSMutableArray alloc] init];
     
-    for(int i = 0; i<Y.count; i++){
-        [X addObject:[NSNumber numberWithInt:i + 1]];
-    }
-    
+    int n = (int) Y.count;
     double SumatoryX = 0;
     double SumatoryPrimeX = 0;
     double SumatoryPrimeXsquared = 0;
     double SumatoryY = 0;
     double SumatoryPrimeXTimesY = 0;
 
-    for(int i=0; i < X.count; i++) {
-        
-        SumatoryX = [X[i] doubleValue];
-        SumatoryPrimeX += log([X[i] doubleValue]);
-        SumatoryPrimeXsquared +=pow(log([X[i] doubleValue]), 2);
-        SumatoryY += [Y[i] doubleValue];
-        SumatoryPrimeXTimesY += log([X[i] doubleValue]) * [Y[i] doubleValue];
-        
+    // X =[1,2,3,4,.....,n]
+    // so we can use i from 1 to n+1
+    
+    for(int i=1; i < n+1; i++) {
+        SumatoryX += i;
+        SumatoryPrimeX += log(i);
+        SumatoryPrimeXsquared += pow(log(i), 2);
+        SumatoryY += [Y[i-1] doubleValue];
+        SumatoryPrimeXTimesY += log(i) * [Y[i-1] doubleValue];
     }
     
-    int n = (int) X.count;
     double B =(n * SumatoryPrimeXTimesY - SumatoryPrimeX * SumatoryY)/(n * SumatoryPrimeXsquared - pow(SumatoryPrimeX,2));
     
     // A = Yprom - B * XPrimeprom
@@ -351,10 +347,8 @@
     
     NSMutableArray *logarithmicTrendline = [[NSMutableArray alloc] init];
     
-    for(int i = 0; i < (X.count + 3); i++){
-        
-//        prediction = A + B * log([X[i] doubleValue]);
-        prediction = A + B * log(i + 1);
+    for(int i = 1; i < ((n+1) + 3); i++){
+        prediction = A + B * log(i);
 
         [logarithmicTrendline addObject:[NSNumber numberWithDouble:prediction]];
     }
