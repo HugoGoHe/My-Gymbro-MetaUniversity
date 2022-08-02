@@ -35,6 +35,7 @@
         [self.view endEditing:YES];
     }else{
         self.errorLabel.text = @"";
+        self.selectedImage = [self resizeImage:self.selectedImage];
         [ProgressPic postUserImage:self.selectedImage withWeight:[self.weightLabel.text floatValue] withDate:self.currentDate withCompletion:^(BOOL succeeded, NSError * _Nullable error){
             if(!error){
                 [self.delegate didPost];
@@ -47,9 +48,30 @@
         [nav setSelectedViewController:[nav.viewControllers objectAtIndex:0]];
         [self.navigationController presentViewController:nav animated:YES completion:nil];
     }
-   
-    
 }
+
+
+/* Method that resizes the images used by the user in order for them to be of an acceptable file size for the Parse database.
+    @param image: image to be resized
+ */
+- (UIImage *)resizeImage:(UIImage *)image {
+    // Set size for new images
+    CGSize size = CGSizeMake(400, 400);
+    // Create an image view with the desired size
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    // Fill the newly created imade view with the selected image
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    // Change the size of the image and store it in a new variable
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    // Return the resized image
+    return newImage;
+}
+
+
 
 - (IBAction)didTapBack:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
