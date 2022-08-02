@@ -25,7 +25,7 @@
 
 //Weight lifted in exercises
 @property (strong, nonatomic) NSArray *availableExercises;
-@property (strong, nonatomic) NSArray *userExercises;
+@property (strong, nonatomic) NSMutableArray *userExercises;
 @property (strong, nonatomic) NSMutableArray *weightsOfExercises;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -51,16 +51,18 @@
     self.dates = [[NSMutableArray alloc] init];
     self.weights = [[NSMutableArray alloc] init];
     self.formatedDates = [[NSMutableArray alloc] init];
-    
-    self.availableExercises = [[NSArray alloc] init];
-    self.userExercises = [[NSArray alloc] init];
-    self.weightsOfExercises =[[NSMutableArray alloc] init];
 
+    self.availableExercises = [[NSArray alloc] init];
+    self.userExercises = [[NSMutableArray alloc] init];
+    self.weightsOfExercises =[[NSMutableArray alloc] init];
+    
+    [self getAvailableExercises];
+    
     [self getData];
 
 }
 
--(void)getData{
+-(void)getAvailableExercises{
     //Body weight change over time
     PFQuery *progressPicQuery = [ProgressPic query];
     [progressPicQuery whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -83,6 +85,12 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+
+
+-(void)getData{
+
     
     //Weight lifted in different exercises
     
@@ -97,7 +105,9 @@
             [userExercises orderByAscending:@"postedAt"];
             [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
                 if (!error) {
-                    self.userExercises = userExercises;
+                    [self.userExercises removeAllObjects];
+                    [self.weightsOfExercises removeAllObjects];
+                    self.userExercises = [userExercises mutableCopy];
                     
                     for (int i = 0; i < self.availableExercises.count; i++) {
                   //      NSLog(@"%@", self.availableExercises[i]);
@@ -119,6 +129,7 @@
 
                     [self.tableView reloadData];
                     [self irregularIntervalsChart:self.WeightChartView];
+                    [self.refreshControl endRefreshing];
 
                     }
                 else{
@@ -134,7 +145,6 @@
      //   NSLog(@"%@", self.availableExercises);
     }];
     
-    [self.refreshControl endRefreshing];
 
 }
 
@@ -336,24 +346,20 @@
     
     // A = Yprom - B * XPrimeprom
     
-    double A = (SumatoryY/X.count) - B * (SumatoryPrimeX /X.count);
+    double A = (SumatoryY/n) - B * (SumatoryPrimeX /n);
     double prediction = 0;
     
     NSMutableArray *logarithmicTrendline = [[NSMutableArray alloc] init];
-    for(int i = 0; i < X.count; i++){
+    
+    for(int i = 0; i < (X.count + 3); i++){
         
-        prediction = A + B * log([X[i] doubleValue]);
+//        prediction = A + B * log([X[i] doubleValue]);
+        prediction = A + B * log(i + 1);
+
         [logarithmicTrendline addObject:[NSNumber numberWithDouble:prediction]];
     }
-//    NSLog(@"%f", B);
-//    NSLog(@"%f", A);
-//
-//    NSLog(@"%@", logarithmicTrendline);
+
     return logarithmicTrendline;
 }
-
-
-
-
 @end
 
