@@ -69,7 +69,7 @@
     [getQuery whereKey:@"author" equalTo:[PFUser currentUser]];
     [getQuery orderByDescending:@"createdAt"];
     [getQuery findObjectsInBackgroundWithBlock:^(NSArray<ProgressPic *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
+        if (!error) {
             //Storing the data in an array and reloading the collectionView
             self.arrayOfPosts = (NSMutableArray *)posts;
             [self.collectionView reloadData];

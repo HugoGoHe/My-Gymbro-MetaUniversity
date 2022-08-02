@@ -21,7 +21,6 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     // Setting up my parse server with the app
     
-    
     //Code for connecting the parse serer to the app
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"gZYgnXe8SCncbFRTGiF9ibJQbwzGVGnaBubEk1S8"; //

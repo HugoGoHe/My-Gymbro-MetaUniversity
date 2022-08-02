@@ -16,7 +16,6 @@
 @dynamic username;
 @dynamic postedAt;
 
-
 + (nonnull NSString *)parseClassName {
     return @"Exercise";
 }

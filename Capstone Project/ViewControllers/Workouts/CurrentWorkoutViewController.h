@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) Boolean exists;
 @property(strong, nonatomic) Workout *selectedWorkout;
 @property (strong, nonatomic) id<CurrentWorkoutViewControllerDelegate> delegate;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 

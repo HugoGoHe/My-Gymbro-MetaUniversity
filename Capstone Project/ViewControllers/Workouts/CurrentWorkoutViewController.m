@@ -56,12 +56,10 @@ static const int MAXNUMREPS = 99;
     }
     [self getExercises];
     
-   // NSArray *availableExercises = @[@"leg press", @"leg extensions", @"leg curls"];
     self.listOfExercises = [[NSMutableArray alloc] init];
     self.suggestedExercises = [[NSMutableArray alloc] init];
- //   self.listOfExercises = [availableExercises mutableCopy];;
-  //  self.autocompleteExercises = [self.listOfExercises mutableCopy];
 }
+
 //Table view is hidden when the user finishes editing
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     self.suggestedTextTableView.hidden = YES;
@@ -73,6 +71,7 @@ replacementString:(NSString *)string {
     NSString *substring = [NSString stringWithString:textField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
     //Performs a query only if it is the first letter typed
+    //instead of making a query for every letter typed
     if(substring.length == 1){
         //Fetch Data
         PFQuery *availableExercisesQuery = [PFQuery queryWithClassName:@"AvailableExercise"];
@@ -98,7 +97,6 @@ replacementString:(NSString *)string {
         self.suggestedTextTableView.hidden = YES;
         [self.suggestedExercises removeAllObjects];
     }
-    
     return YES;
 }
 

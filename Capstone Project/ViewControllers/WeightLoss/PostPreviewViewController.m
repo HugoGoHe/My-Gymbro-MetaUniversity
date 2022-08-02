@@ -50,10 +50,7 @@
     }
 }
 
-
-/* Method that resizes the images used by the user in order for them to be of an acceptable file size for the Parse database.
-    @param image: image to be resized
- */
+//Method that resizes the images used by the user in order for them to be of an acceptable file size for the Parse database.
 - (UIImage *)resizeImage:(UIImage *)image {
     // Set size for new images
     CGSize size = CGSizeMake(400, 400);
@@ -70,8 +67,6 @@
     // Return the resized image
     return newImage;
 }
-
-
 
 - (IBAction)didTapBack:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

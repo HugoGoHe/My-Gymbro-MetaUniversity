@@ -16,11 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 - (IBAction)didTapSignUp:(id)sender {
-    
     //Check for any blank fields
     if([self.passwordTextField.text isEqual:@""] || [self.confirmPasswordTextField.text isEqual:@""] || [self.usernameTextField.text isEqual:@""]){
         self.samePasswordLabel.text = @"One or more fields are Blank.";
