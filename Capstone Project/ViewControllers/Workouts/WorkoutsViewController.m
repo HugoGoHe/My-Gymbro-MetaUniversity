@@ -58,7 +58,6 @@
         }
         else {
             // handle error
-            NSLog(@"%@", error.localizedDescription);
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Workouts"
                                                                            message:@"The internet connection appears to be offline."
                                                                     preferredStyle:UIAlertControllerStyleAlert];

@@ -15,7 +15,7 @@
 @dynamic author;
 
 + (nonnull NSString *)parseClassName {
-    return @"Post";
+    return @"ProgressPic";
 }
 
 + (void) postUserImage: ( UIImage * _Nullable )image withWeight: (float)weight  withDate: (NSDate *_Nullable)postedAt withCompletion: (PFBooleanResultBlock  _Nullable)completion{

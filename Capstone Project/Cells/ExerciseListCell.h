@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *nameOfExerciseLabel;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

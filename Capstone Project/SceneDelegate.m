@@ -21,7 +21,6 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     // Setting up my parse server with the app
     
-    
     //Code for connecting the parse serer to the app
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"gZYgnXe8SCncbFRTGiF9ibJQbwzGVGnaBubEk1S8"; //
@@ -34,7 +33,10 @@
     //User can stay logged in
     if (PFUser.currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
-    }
+        UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+        self.window.rootViewController = tabBarController;
+        //So it goes to the second item of the tab bar first
+        [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
+            }
 }
 @end

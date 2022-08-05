@@ -8,6 +8,7 @@ target 'Capstone Project' do
   # Pods for Capstone Project
   pod 'Parse'
   pod 'Highcharts'
+  pod 'KASlideShow'
   target 'Capstone ProjectTests' do
     inherit! :search_paths
     # Pods for testing
