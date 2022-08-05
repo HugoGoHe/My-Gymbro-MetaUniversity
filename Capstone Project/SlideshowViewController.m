@@ -36,13 +36,11 @@
     self.slideshow.delegate = self;
     [self.slideshow setDelay:1]; // Delay between transitions
     [self.slideshow setTransitionDuration:.5]; // Transition duration
-    [self.slideshow setTransitionType:KASlideShowTransitionFade]; // Choose a transition type (fade or slide)
     [self.slideshow setImagesContentMode:UIViewContentModeScaleAspectFill]; // Choose a content mode for images to display
-    [self.slideshow addGesture:KASlideShowGestureTap]; // Gesture to go previous/next directly on the image
     
-    [_slideshow setTransitionType:KASlideShowTransitionFade];
-    _slideshow.gestureRecognizers = nil;
-    [_slideshow addGesture:KASlideShowGestureTap];
+    [self.slideshow setTransitionType:KASlideShowTransitionFade];// Choose a transition type (fade or slide)
+    self.slideshow.gestureRecognizers = nil;
+    [self.slideshow addGesture:KASlideShowGestureTap];// Gesture to go previous/next directly on the image
 }
 
 #pragma mark - KASlideShow datasource

@@ -6,9 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KASlideShow.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol KASlideShowDelegate;
 
 @interface SlideshowViewController : UIViewController<KASlideShowDelegate>
 

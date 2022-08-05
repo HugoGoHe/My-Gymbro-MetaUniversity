@@ -44,7 +44,7 @@
     
     //Initialize a UIRefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(getData) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(obtainData) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     //Bodyweight change over time
@@ -53,18 +53,17 @@
     self.formatedDates = [[NSMutableArray alloc] init];
 
     //Weight lifted in exercises
-    self.availableExercises = [[NSArray alloc] init];
     self.userExercises = [[NSMutableArray alloc] init];
     self.weightsOfExercises =[[NSMutableArray alloc] init];
     
     //Fetching available exercises
-    [self getAvailableExercises];
+    [self AvailableExercises];
     
     //Fetching data and creating charts
-    [self getData];
+    [self obtainData];
 }
 
--(void)getAvailableExercises{
+-(void)AvailableExercises{
     //Body weight change over time
     PFQuery *progressPicQuery = [ProgressPic query];
     [progressPicQuery whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -82,12 +81,13 @@
                 [self.formatedDates addObject:[dateFormatter stringFromDate:self.dates[i]]];
             }
         }else{
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self showErrorMessage];
+            
         }
     }];
 }
 
--(void)getData{
+-(void)obtainData{
     //Weight lifted in different exercises
 
     //Getting array of available exercises
@@ -123,14 +123,14 @@
                     [self.refreshControl endRefreshing];
                     }
                 else{
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    [self showErrorMessage];
+                    
                 }
             }];
             }
         else{
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self showErrorMessage];
+            
         }
     }];
 }
@@ -141,9 +141,23 @@
     return cell;
 }
 
+-(void)showErrorMessage{
+    // Log details of the failure
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Charts"
+                                                                   message:@"The internet connection appears to be offline."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.weightsOfExercises.count;
 }
+
 
 #pragma mark - Charts
 
@@ -201,10 +215,7 @@
         
         NSNumber *unixtimeMilisecondsObject = [NSNumber numberWithInteger:unixtimeMiliseconds];
         
-        NSMutableArray * point = [[NSMutableArray alloc] init];
-        
-        [point addObject:unixtimeMilisecondsObject];
-        [point addObject:[self.weights objectAtIndex:i]];
+        NSArray * point = [NSArray arrayWithObjects:unixtimeMilisecondsObject, [self.weights objectAtIndex:i], nil];
         
         [arrayOfPoints addObject:point];
     }
@@ -296,15 +307,44 @@
 #pragma mark - Logarithmic Regression
 
 -(NSMutableArray *)logarithmicRegression:(NSMutableArray *)Y{
-    // Y = A + BlnX,  lnX = X'
-    // Y = A + BX'
+   /*
+    For logarithmic regression we have the following model:
+    
+                                      Y = A + BlnX
+
+    Since it is not a linear model, we have to linearize it, so we make a change of variable
+    
+                                           lnX = X', then:
+    
+                                        Y = A + BX' -> (1)
+    
+    Now we have a linear model and by the method of Least squares we can estimate the parameters A and B, where:
+    
+    
+                                         n(Σ X'Y) - (Σ X')(Σ Y)
+                                    B = ------------------------   -> (2)
+                                          n(Σ X'²) - (Σ X')²
+
+                                                &
+    
+                                           _       _
+                                       A = Y - B * X'  -> (3)
+    
+    
+    Where:
+                                            _
+                                            Y: Y average,
+                                            _
+                                            X': X' average
+
+    */
     
     int n = (int) Y.count;
-    double SumatoryX = 0;            //Σ X
-    double SumatoryPrimeX = 0;       //Σ X'
-    double SumatoryPrimeXsquared = 0;//Σ X'²
-    double SumatoryY = 0;            //Σ Y
-    double SumatoryPrimeXTimesY = 0; //Σ X'Y
+    double SumatoryX = 0;              //Σ X
+    double SumatoryPrimeX = 0;         //Σ X'
+    double SumatoryPrimeXsquared = 0;  //Σ X'²
+    double SumatoryY = 0;              //Σ Y
+    double SumatoryPrimeXTimesY = 0;   //Σ X'Y
 
     // X =[1,2,3,4,.....,n]
     // so we can use i from 1 to n+1
@@ -317,25 +357,20 @@
         SumatoryPrimeXTimesY += log(i) * [Y[i-1] doubleValue];
     }
     
-    //         Slope's formula:
-    //
-    //       n(Σ X'Y) - (Σ X')(Σ Y)
-    //  B = ------------------------
-    //         n(Σ X'²) - (Σ X')²
-    
-    
+    // We substitute the values in (2)
     
     double B =(n * SumatoryPrimeXTimesY - SumatoryPrimeX * SumatoryY)/(n * SumatoryPrimeXsquared - pow(SumatoryPrimeX,2));
-    //     _       _          _                _
-    // A = Y - B * X'         Y: Y average,  X': X' average
-    //
+    
+    // We substitute the values in (3)
+    
     double A = (SumatoryY/n) - B * (SumatoryPrimeX /n);
     double prediction = 0;
     
     NSMutableArray *logarithmicTrendline = [[NSMutableArray alloc] init];
     
     for(int i = 1; i < ((n+1) + 3); i++){
-        // Y = A + BlnX
+        
+        // We substitute the values in (1)
         prediction = A + B * log(i);
         [logarithmicTrendline addObject:[NSNumber numberWithDouble:prediction]];
     }

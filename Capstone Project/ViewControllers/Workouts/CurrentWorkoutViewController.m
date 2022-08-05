@@ -87,7 +87,15 @@ replacementString:(NSString *)string {
                 }
             } else {
                 // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Exercises"
+                                                                               message:@"The internet connection appears to be offline."
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
             }
         }];
     }else if (substring.length > 1){
