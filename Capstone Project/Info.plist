@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSContactsUsageDescription</key>
-	<string>Need camera access to take pictures</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
+	<string>Need camera access for taking images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need library access to upload images</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -12,7 +12,7 @@
 #import "PictureGridCell.h"
 #import "SlideshowViewController.h"
 
-@interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PostPreviewViewControllerDelegate>
+@interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate , PostPreviewViewControllerDelegate>
 
 @property(strong,nonatomic) UIImage *selectedImage;
 @property (strong, nonatomic) NSMutableArray *arrayOfPosts;
@@ -60,7 +60,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // Get the image captured by the UIImagePickerController
     self.selectedImage = info[UIImagePickerControllerOriginalImage];
-    [self performSegueWithIdentifier:@"previewSegue" sender:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self performSegueWithIdentifier:@"previewSegue" sender:nil];
+    }];
 }
 
 - (void) getProgressPics{
