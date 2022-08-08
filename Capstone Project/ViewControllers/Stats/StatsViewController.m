@@ -40,7 +40,6 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 300;
     
     //Initialize a UIRefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -60,6 +59,7 @@
     [self AvailableExercises];
     
     //Fetching data and creating charts
+//    [self obtainData];
     [self obtainData];
 }
 
@@ -119,7 +119,6 @@
                     }
                     //Loading the data
                     [self.tableView reloadData];
-                    [self irregularIntervalsChart:self.WeightChartView];
                     [self.refreshControl endRefreshing];
                     }
                 else{
@@ -135,12 +134,6 @@
     }];
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
-    [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.row] withData:self.weightsOfExercises[indexPath.row]];
-    return cell;
-}
-
 -(void)showErrorMessage{
     // Log details of the failure
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Charts"
@@ -154,7 +147,25 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - TableView
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
+    
+    if(indexPath.section == 0){
+        [self irregularIntervalsChart:cell.cellView];
+    }else{
+        [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.section] withData:self.weightsOfExercises[indexPath.section]];
+    }
+
+    return cell;
+}
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.weightsOfExercises.count;
 }
 
@@ -243,7 +254,7 @@
 
 - (void)basicLineChart:(UIView *) cellView ofExercise:(NSString *)nameOfExercise withData:(NSMutableArray *)weights{
     HIChartView *chartView = [[HIChartView alloc] initWithFrame:cellView.bounds];
-    chartView.theme = @"brand-light";
+//    chartView.theme = @"brand-light";
     
     HIOptions *options = [[HIOptions alloc]init];
     
