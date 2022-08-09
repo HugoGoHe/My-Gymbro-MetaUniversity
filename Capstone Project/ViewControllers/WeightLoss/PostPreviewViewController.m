@@ -75,4 +75,11 @@
     [nav setSelectedViewController:[nav.viewControllers objectAtIndex:0]];
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
+
+- (void)touchesEnded: (NSSet *)touches withEvent: (UIEvent *)event {
+    for (UIView* view in self.view.subviews) {
+        if ([view isKindOfClass:[UITextField class]])
+            [view resignFirstResponder];
+    }
+}
 @end
