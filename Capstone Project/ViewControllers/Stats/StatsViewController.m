@@ -100,7 +100,7 @@
             [userExercises whereKey:@"username" equalTo:[PFUser currentUser]];
             [userExercises orderByAscending:@"postedAt"];
             [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
-                if (!error) {
+                if (!error && userExercises.count > 0) {
                     [self.userExercises removeAllObjects];
                     [self.weightsOfExercises removeAllObjects];
                     self.userExercises = [userExercises mutableCopy];
@@ -129,7 +129,11 @@
             }
         else{
             [self showErrorMessage];
-            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+            self.view.window.rootViewController = tabBarController;
+            //So it goes to the second item of the tab bar first
+            [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
         }
     }];
 }
@@ -141,7 +145,13 @@
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+                                                          handler:^(UIAlertAction * action) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+        self.view.window.rootViewController = tabBarController;
+        //So it goes to the second item of the tab bar first
+        [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
+    }];
     
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
