@@ -74,6 +74,11 @@
         if (!error) {
             //Storing the data in an array and reloading the collectionView
             self.arrayOfPosts = (NSMutableArray *)posts;
+            for (int i = 0; i<self.arrayOfPosts.count; i++) {
+                ProgressPic *post = [self.arrayOfPosts objectAtIndex:i];
+                [self.urls addObject:[NSURL URLWithString:post.image.url]];
+            }
+            
             [self.collectionView reloadData];
         }
         else {
@@ -101,7 +106,6 @@
     ProgressPic *progressPic = self.arrayOfPosts[indexPath.row];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:progressPic.image.url]];
     //Array for the slideshow
-    [self.urls addObject:[NSURL URLWithString:progressPic.image.url]];
     
     cell.progressPic.image = [UIImage imageWithData:imageData];
     return cell;

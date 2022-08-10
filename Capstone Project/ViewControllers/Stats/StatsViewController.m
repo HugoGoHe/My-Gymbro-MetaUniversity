@@ -100,7 +100,7 @@
             [userExercises whereKey:@"username" equalTo:[PFUser currentUser]];
             [userExercises orderByAscending:@"postedAt"];
             [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
-                if (!error && userExercises.count > 0) {
+                if (!error ) {
                     [self.userExercises removeAllObjects];
                     [self.weightsOfExercises removeAllObjects];
                     self.userExercises = [userExercises mutableCopy];
@@ -164,7 +164,7 @@
     
     if(indexPath.section == 0){
         [self irregularIntervalsChart:cell.cellView];
-    }else{
+    }else if( self.userExercises.count > 0){
         [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.section] withData:self.weightsOfExercises[indexPath.section]];
     }
 
@@ -176,7 +176,15 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.weightsOfExercises.count;
+    long sections = 0;
+    
+    if(self.weights.count > 0){
+        sections ++;
+    }
+    else if(self.weightsOfExercises.count > 0){
+        sections = sections + self.weightsOfExercises.count;
+    }
+    return sections;
 }
 
 
