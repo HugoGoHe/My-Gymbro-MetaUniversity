@@ -221,7 +221,9 @@
     HIYAxis *yaxis = [[HIYAxis alloc]init];
     yaxis.title = [[HITitle alloc]init];
     yaxis.title.text = @"Weight";
-    yaxis.min = @0;
+    //For a more significant data visualization, y axis starts in the last value minus 10
+    double range =  [[self.weights objectAtIndex:(self.weights.count - 1)]doubleValue] - 10;
+    yaxis.min = [NSNumber numberWithDouble:range];
     
     HITooltip *tooltip = [[HITooltip alloc]init];
     tooltip.headerFormat = @"<b>{series.name}</b><br>";
