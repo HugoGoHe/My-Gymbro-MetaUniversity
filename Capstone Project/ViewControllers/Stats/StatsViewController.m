@@ -181,10 +181,11 @@
     if(self.weights.count > 0){
         sections ++;
     }
-    else if(self.weightsOfExercises.count > 0){
+    if(self.weightsOfExercises.count > 0){
         sections = sections + self.weightsOfExercises.count;
+        sections --;
     }
-    return sections;
+    return sections ;
 }
 
 
