@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSMutableArray *weightsOfExercises;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSMutableArray *namesOfUserExercises;
 
 
 @end
@@ -54,16 +55,17 @@
     //Weight lifted in exercises
     self.userExercises = [[NSMutableArray alloc] init];
     self.weightsOfExercises =[[NSMutableArray alloc] init];
+    self.namesOfUserExercises = [[NSMutableArray alloc] init];
     
     //Fetching available exercises
-    [self AvailableExercises];
+    [self obtainProgressPics];
     
     //Fetching data and creating charts
 //    [self obtainData];
     [self obtainData];
 }
 
--(void)AvailableExercises{
+-(void)obtainProgressPics{
     //Body weight change over time
     PFQuery *progressPicQuery = [ProgressPic query];
     [progressPicQuery whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -112,10 +114,15 @@
                         for (int j = 0; j < self.userExercises.count; j++){
                             exercise = [self.userExercises objectAtIndex:j];
                             if ([exercise.name isEqualToString: self.availableExercises[i]]) {
+                                if (!([self.namesOfUserExercises containsObject:exercise.name])){
+                                    [self.namesOfUserExercises addObject:exercise.name];
+                                }
                                 [weightsOfExercise addObject: [NSNumber numberWithFloat:exercise.weight]];
                             }
                         }
-                        [self.weightsOfExercises addObject:weightsOfExercise];
+                        if (weightsOfExercise.count > 0){
+                            [self.weightsOfExercises addObject:weightsOfExercise];
+                        }
                     }
                     //Loading the data
                     [self.tableView reloadData];
@@ -161,11 +168,10 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
-    
     if(indexPath.section == 0){
         [self irregularIntervalsChart:cell.cellView];
     }else if( self.userExercises.count > 0){
-        [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.section] withData:self.weightsOfExercises[indexPath.section]];
+        [self basicLineChart:cell.cellView ofExercise:self.namesOfUserExercises[indexPath.section - 1] withData:self.weightsOfExercises[indexPath.section - 1]];
     }
 
     return cell;
@@ -183,9 +189,9 @@
     }
     if(self.weightsOfExercises.count > 0){
         sections = sections + self.weightsOfExercises.count;
-        sections --;
     }
-    return sections ;
+    return sections;
+    
 }
 
 
@@ -223,8 +229,9 @@
     yaxis.title = [[HITitle alloc]init];
     yaxis.title.text = @"Weight";
     //For a more significant data visualization, y axis starts in the last value minus 10
-    double range =  [[self.weights objectAtIndex:(self.weights.count - 1)]doubleValue] - 10;
-    yaxis.min = [NSNumber numberWithDouble:range];
+//    double range =  [[self.weights objectAtIndex:(self.weights.count - 1)]doubleValue] - 10;
+//    yaxis.min = [NSNumber numberWithDouble:range];
+    yaxis.min = @0;
     
     HITooltip *tooltip = [[HITooltip alloc]init];
     tooltip.headerFormat = @"<b>{series.name}</b><br>";
