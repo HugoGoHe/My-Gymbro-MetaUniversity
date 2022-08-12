@@ -128,7 +128,7 @@
         UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier: @"currentWorkout"];
         
         NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
-        NSInteger index = myIndexPath.row;
+        NSInteger index = myIndexPath.section;
         Workout *selectedWorkout = self.arrayOfWorkouts[index];
         CurrentWorkoutViewController *cwvc = (CurrentWorkoutViewController *) nav.topViewController;
         cwvc.selectedWorkout = selectedWorkout;
