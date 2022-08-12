@@ -806,7 +806,7 @@
         <scene sceneID="FCs-eF-VoY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mnj-3N-XL0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Workouts" image="rosette" catalog="system" id="K8a-KS-aux"/>
+                    <tabBarItem key="tabBarItem" title="Workouts" image="weight-icon-png-22" id="K8a-KS-aux"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3rB-Hw-cGj">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
@@ -907,7 +907,7 @@
         <image name="chart.xyaxis.line" catalog="system" width="128" height="101"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="rosette" catalog="system" width="106" height="128"/>
+        <image name="weight-icon-png-22" width="30" height="30"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -61,7 +61,6 @@
     [self obtainProgressPics];
     
     //Fetching data and creating charts
-//    [self obtainData];
     [self obtainData];
 }
 
@@ -282,7 +281,6 @@
 
 - (void)basicLineChart:(UIView *) cellView ofExercise:(NSString *)nameOfExercise withData:(NSMutableArray *)weights{
     HIChartView *chartView = [[HIChartView alloc] initWithFrame:cellView.bounds];
-//    chartView.theme = @"brand-light";
     
     HIOptions *options = [[HIOptions alloc]init];
     

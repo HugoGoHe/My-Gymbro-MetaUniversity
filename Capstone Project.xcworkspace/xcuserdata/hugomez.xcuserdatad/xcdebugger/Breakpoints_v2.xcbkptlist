@@ -14,8 +14,8 @@
             filePath = "Capstone Project/ViewControllers/Stats/StatsViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-obtainData"
             landmarkType = "7">
          </BreakpointContent>
