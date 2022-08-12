@@ -229,9 +229,9 @@
     yaxis.title = [[HITitle alloc]init];
     yaxis.title.text = @"Weight";
     //For a more significant data visualization, y axis starts in the last value minus 10
-//    double range =  [[self.weights objectAtIndex:(self.weights.count - 1)]doubleValue] - 10;
-//    yaxis.min = [NSNumber numberWithDouble:range];
-    yaxis.min = @0;
+    double range =  [[self.weights objectAtIndex:(self.weights.count - 1)]doubleValue] - 10;
+    yaxis.min = [NSNumber numberWithDouble:range];
+
     
     HITooltip *tooltip = [[HITooltip alloc]init];
     tooltip.headerFormat = @"<b>{series.name}</b><br>";
@@ -346,6 +346,9 @@
 #pragma mark - Logarithmic Regression
 
 -(NSMutableArray *)logarithmicRegression:(NSMutableArray *)Y{
+    if (Y.count <2) {
+        return nil;
+    }
    /*
     For logarithmic regression we have the following model:
     
@@ -407,7 +410,7 @@
     
     NSMutableArray *logarithmicTrendline = [[NSMutableArray alloc] init];
     
-    for(int i = 1; i < ((n+1) + 3); i++){
+    for(int i = 1; i < ((n+1) + n/4); i++){
         
         // We substitute the values in (1)
         prediction = A + B * log(i);
