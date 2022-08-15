@@ -12,7 +12,7 @@
 #import "PictureGridCell.h"
 #import "SlideshowViewController.h"
 
-@interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PostPreviewViewControllerDelegate>
+@interface WeightLossViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate , PostPreviewViewControllerDelegate>
 
 @property(strong,nonatomic) UIImage *selectedImage;
 @property (strong, nonatomic) NSMutableArray *arrayOfPosts;
@@ -45,14 +45,7 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    
-    // The Xcode simulator does not support taking pictures, so let's first check that the camera is indeed supported on the device before trying to present it.
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -60,7 +53,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // Get the image captured by the UIImagePickerController
     self.selectedImage = info[UIImagePickerControllerOriginalImage];
-    [self performSegueWithIdentifier:@"previewSegue" sender:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self performSegueWithIdentifier:@"previewSegue" sender:nil];
+    }];
 }
 
 - (void) getProgressPics{
@@ -72,6 +67,11 @@
         if (!error) {
             //Storing the data in an array and reloading the collectionView
             self.arrayOfPosts = (NSMutableArray *)posts;
+            for (int i = 0; i<self.arrayOfPosts.count; i++) {
+                ProgressPic *post = [self.arrayOfPosts objectAtIndex:i];
+                [self.urls addObject:[NSURL URLWithString:post.image.url]];
+            }
+            
             [self.collectionView reloadData];
         }
         else {
@@ -99,7 +99,6 @@
     ProgressPic *progressPic = self.arrayOfPosts[indexPath.row];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:progressPic.image.url]];
     //Array for the slideshow
-    [self.urls addObject:[NSURL URLWithString:progressPic.image.url]];
     
     cell.progressPic.image = [UIImage imageWithData:imageData];
     return cell;

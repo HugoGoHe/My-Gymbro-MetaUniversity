@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *exerciseTextField;
 @property(strong, nonatomic) NSMutableArray *listOfExercises;
 @property(strong, nonatomic) NSMutableArray *suggestedExercises;
-
+@property(strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 @end
 
 @implementation CurrentWorkoutViewController
@@ -58,6 +58,7 @@ static const int MAXNUMREPS = 99;
     
     self.listOfExercises = [[NSMutableArray alloc] init];
     self.suggestedExercises = [[NSMutableArray alloc] init];
+    
 }
 
 //Table view is hidden when the user finishes editing
@@ -291,6 +292,13 @@ replacementString:(NSString *)string {
          frame.size = self.suggestedTextTableView.contentSize;
          self.suggestedTextTableView.frame = frame;
     }
+
+- (void)touchesEnded: (NSSet *)touches withEvent: (UIEvent *)event {
+    for (UIView* view in self.view.subviews) {
+        if ([view isKindOfClass:[UITextField class]])
+            [view resignFirstResponder];
+    }
+}
 
 @end
 

@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSMutableArray *weightsOfExercises;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSMutableArray *namesOfUserExercises;
 
 
 @end
@@ -40,7 +41,6 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 300;
     
     //Initialize a UIRefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -55,15 +55,16 @@
     //Weight lifted in exercises
     self.userExercises = [[NSMutableArray alloc] init];
     self.weightsOfExercises =[[NSMutableArray alloc] init];
+    self.namesOfUserExercises = [[NSMutableArray alloc] init];
     
     //Fetching available exercises
-    [self AvailableExercises];
+    [self obtainProgressPics];
     
     //Fetching data and creating charts
     [self obtainData];
 }
 
--(void)AvailableExercises{
+-(void)obtainProgressPics{
     //Body weight change over time
     PFQuery *progressPicQuery = [ProgressPic query];
     [progressPicQuery whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -100,7 +101,7 @@
             [userExercises whereKey:@"username" equalTo:[PFUser currentUser]];
             [userExercises orderByAscending:@"postedAt"];
             [userExercises findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userExercises, NSError * _Nullable error) {
-                if (!error) {
+                if (!error ) {
                     [self.userExercises removeAllObjects];
                     [self.weightsOfExercises removeAllObjects];
                     self.userExercises = [userExercises mutableCopy];
@@ -112,14 +113,18 @@
                         for (int j = 0; j < self.userExercises.count; j++){
                             exercise = [self.userExercises objectAtIndex:j];
                             if ([exercise.name isEqualToString: self.availableExercises[i]]) {
+                                if (!([self.namesOfUserExercises containsObject:exercise.name])){
+                                    [self.namesOfUserExercises addObject:exercise.name];
+                                }
                                 [weightsOfExercise addObject: [NSNumber numberWithFloat:exercise.weight]];
                             }
                         }
-                        [self.weightsOfExercises addObject:weightsOfExercise];
+                        if (weightsOfExercise.count > 0){
+                            [self.weightsOfExercises addObject:weightsOfExercise];
+                        }
                     }
                     //Loading the data
                     [self.tableView reloadData];
-                    [self irregularIntervalsChart:self.WeightChartView];
                     [self.refreshControl endRefreshing];
                     }
                 else{
@@ -130,15 +135,13 @@
             }
         else{
             [self showErrorMessage];
-            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+            self.view.window.rootViewController = tabBarController;
+            //So it goes to the second item of the tab bar first
+            [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
         }
     }];
-}
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
-    [self basicLineChart:cell.cellView ofExercise:self.availableExercises[indexPath.row] withData:self.weightsOfExercises[indexPath.row]];
-    return cell;
 }
 
 -(void)showErrorMessage{
@@ -148,14 +151,46 @@
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+                                                          handler:^(UIAlertAction * action) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+        self.view.window.rootViewController = tabBarController;
+        //So it goes to the second item of the tab bar first
+        [tabBarController setSelectedViewController:[tabBarController.viewControllers objectAtIndex:1]];
+    }];
     
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - TableView
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ChartCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chart Cell" forIndexPath:indexPath];
+    if(indexPath.section == 0){
+        [self irregularIntervalsChart:cell.cellView];
+    }else if( self.userExercises.count > 0){
+        [self basicLineChart:cell.cellView ofExercise:self.namesOfUserExercises[indexPath.section - 1] withData:self.weightsOfExercises[indexPath.section - 1]];
+    }
+
+    return cell;
+}
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.weightsOfExercises.count;
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    long sections = 0;
+    
+    if(self.weights.count > 0){
+        sections ++;
+    }
+    if(self.weightsOfExercises.count > 0){
+        sections = sections + self.weightsOfExercises.count;
+    }
+    return sections;
+    
 }
 
 
@@ -192,7 +227,10 @@
     HIYAxis *yaxis = [[HIYAxis alloc]init];
     yaxis.title = [[HITitle alloc]init];
     yaxis.title.text = @"Weight";
-    yaxis.min = @0;
+    //For a more significant data visualization, y axis starts in the last value minus 10
+    double range =  [[self.weights objectAtIndex:(self.weights.count - 1)]doubleValue] - 10;
+    yaxis.min = [NSNumber numberWithDouble:range];
+
     
     HITooltip *tooltip = [[HITooltip alloc]init];
     tooltip.headerFormat = @"<b>{series.name}</b><br>";
@@ -243,7 +281,6 @@
 
 - (void)basicLineChart:(UIView *) cellView ofExercise:(NSString *)nameOfExercise withData:(NSMutableArray *)weights{
     HIChartView *chartView = [[HIChartView alloc] initWithFrame:cellView.bounds];
-    chartView.theme = @"brand-light";
     
     HIOptions *options = [[HIOptions alloc]init];
     
@@ -307,6 +344,9 @@
 #pragma mark - Logarithmic Regression
 
 -(NSMutableArray *)logarithmicRegression:(NSMutableArray *)Y{
+    if (Y.count <2) {
+        return nil;
+    }
    /*
     For logarithmic regression we have the following model:
     
@@ -368,7 +408,7 @@
     
     NSMutableArray *logarithmicTrendline = [[NSMutableArray alloc] init];
     
-    for(int i = 1; i < ((n+1) + 3); i++){
+    for(int i = 1; i < ((n+1) + n/4); i++){
         
         // We substitute the values in (1)
         prediction = A + B * log(i);

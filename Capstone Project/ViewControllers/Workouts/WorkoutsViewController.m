@@ -27,6 +27,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = 50;
+    self.tableView.sectionHeaderHeight = 4;
+    self.tableView.sectionFooterHeight = 4;
     
     self.arrayOfWorkouts = [[NSMutableArray alloc] init];
     [self getWorkouts];
@@ -72,9 +74,11 @@
     }];
 }
 
+#pragma mark - TableView
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     WorkoutCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Workout Cell" forIndexPath:indexPath];
-    Workout *workout = self.arrayOfWorkouts[indexPath.row];
+    Workout *workout = self.arrayOfWorkouts[indexPath.section];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
     cell.dateLabel.text = [dateFormatter stringFromDate:workout.date];
@@ -83,17 +87,21 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayOfWorkouts.count;
+    return 1;
 }
 
 //Deleting rows from tableView and database
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
-        [self.arrayOfWorkouts[indexPath.row] deleteInBackground];
-        [self.arrayOfWorkouts removeObjectAtIndex:indexPath.row];
+        [self.arrayOfWorkouts[indexPath.section] deleteInBackground];
+        [self.arrayOfWorkouts removeObjectAtIndex:indexPath.section];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView reloadData];
     }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.arrayOfWorkouts.count;
 }
 
 #pragma mark - Navigation
@@ -120,7 +128,7 @@
         UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier: @"currentWorkout"];
         
         NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
-        NSInteger index = myIndexPath.row;
+        NSInteger index = myIndexPath.section;
         Workout *selectedWorkout = self.arrayOfWorkouts[index];
         CurrentWorkoutViewController *cwvc = (CurrentWorkoutViewController *) nav.topViewController;
         cwvc.selectedWorkout = selectedWorkout;

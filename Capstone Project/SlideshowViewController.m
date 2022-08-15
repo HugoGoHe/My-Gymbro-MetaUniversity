@@ -31,6 +31,8 @@
     [_speedSlider setUserInteractionEnabled:NO];
 
      _datasource = self.urls;
+    _datasource=[[[_datasource reverseObjectEnumerator] allObjects] mutableCopy];
+
      // KASlideshow
     self.slideshow.datasource = self;
     self.slideshow.delegate = self;
